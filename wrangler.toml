@@ -1,0 +1,8 @@
+# The front page. Its own Worker, not a path on another one: every project here
+# is a separate origin, so a bug in any of them cannot reach another's cookies,
+# localStorage or install identity.
+name = "altorien"
+compatibility_date = "2026-10-30"
+
+[assets]
+directory = "./public"
