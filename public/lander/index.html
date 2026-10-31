@@ -246,6 +246,26 @@ section { padding: 46px 0 0; }
 .opener h2 { font-size: var(--t-5); font-weight: 600; letter-spacing: -.024em;
     margin-top: 6px; line-height: 1.12; }
 
+/* Borrowed from the market-open indicator on intrinsics.app, which is the
+ * same claim -- this thing is running right now -- so it should look the
+ * same. Recoloured for cream: #00ff41 is tuned for a dark terminal and burns
+ * on this background, so the dot is a deep green with the glow carrying the
+ * brightness instead of the fill.
+ *
+ * The pulse stops for anyone who has asked motion to stop. A looping
+ * animation in the corner of the eye is exactly what that setting is for. */
+.live-dot {
+    width: 7px; height: 7px; border-radius: 50%; display: inline-block;
+    background: #1f8f3d; margin-right: 7px; vertical-align: middle;
+    box-shadow: 0 0 5px rgba(31,143,61,.75), 0 0 10px rgba(31,143,61,.3);
+    animation: live-pulse 2s ease-in-out infinite;
+}
+@keyframes live-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(31,143,61,.75), 0 0 10px rgba(31,143,61,.3); }
+    50%      { box-shadow: 0 0 9px rgba(31,143,61,.95), 0 0 18px rgba(31,143,61,.5); }
+}
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+
 /* ---------- work entries ----------
  * The owner's note after seeing the first version: "it's hard to see that's a
  * link to my tool". It was a heading with an underline somewhere beneath it,
@@ -430,13 +450,13 @@ footer a:hover { color: var(--text); }
 <section id="work">
     <div class="opener">
         <div class="mark">&sect; 01 / Work</div>
-        <h2>Two tools, both live.</h2>
+        <h2>Two Apps, both live.</h2>
     </div>
 
     <article class="entry p-int">
         <div class="entry-head">
             <span class="num">01</span>
-            <span class="ver">238 commits / 8 ratios / live</span>
+            <span class="ver"><i class="live-dot" aria-hidden="true"></i>Live</span>
         </div>
         <a class="app" href="https://intrinsics.altorien.com">
             <img src="icon-intrinsics.png" alt="" width="68" height="68" loading="lazy">
@@ -452,7 +472,7 @@ footer a:hover { color: var(--text); }
     <article class="entry p-fwf">
         <div class="entry-head">
             <span class="num">02</span>
-            <span class="ver">578 checks / 3,643 airports / live</span>
+            <span class="ver"><i class="live-dot" aria-hidden="true"></i>Live</span>
         </div>
         <a class="app" href="https://fly.altorien.com">
             <img src="icon-fwf.png" alt="" width="68" height="68" loading="lazy">
