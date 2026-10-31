@@ -85,6 +85,28 @@ none of it should be pushed to one. Copy that folder to a personal drive or
 iCloud **before Monday**. It is the only thing in this document that is
 genuinely unrecoverable.
 
+## Finishing the Intrinsics move
+
+Intrinsics is still on GitHub Pages at `intrinsics.app`, which is a second
+domain you are paying for. To fold it under `altorien.com`:
+
+1. Cloudflare → altorien.com → DNS → add **CNAME `intrinsics` →
+   `altorienl.github.io`**, proxy status **DNS only** (grey cloud). The grey
+   cloud is required: GitHub cannot issue its certificate through Cloudflare's
+   proxy.
+2. `bash tools/finish-intrinsics.sh` — rewrites the Pages CNAME file, pushes,
+   and repoints the links on altorien.com. It refuses to run until the DNS
+   record resolves, so the order cannot be got wrong.
+3. Wait for GitHub to issue the certificate (minutes), then check
+   `https://intrinsics.altorien.com`.
+4. Only then let `intrinsics.app` lapse, or set GoDaddy forwarding to the new
+   address so old links survive.
+
+Pages was kept rather than moving Intrinsics to a Worker on purpose: the
+nightly scan commits `grades.json` and Pages redeploys itself, where a Worker
+would need a Cloudflare API token in CI and would silently serve stale grades
+the day that token expired.
+
 ## Things that will bite
 
 - **GoDaddy's DNS zone still exists** for altorien.com and still answers, even
