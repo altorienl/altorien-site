@@ -14,11 +14,15 @@ a Cloudflare account that is yours. The laptop was only ever a place to type.
 | Personal site + resume | `altorien.com`, `www.altorien.com` | `altorienl/altorien-site` (private) |
 | Fly with Friends | `fly.altorien.com`, `fly-with-friends.altorien.workers.dev` | `altorienl/fly-with-friends` (private) |
 | Fly with Friends API | `fly-with-friends-api.altorien.workers.dev` | same repo, `worker/` |
-| Intrinsics | `intrinsics.app` (GitHub Pages) | `altorienl/intrinsics` (public) |
+| Intrinsics | `intrinsics.altorien.com` (GitHub Pages) | `altorienl/intrinsics` (public) |
 
 `altorien.com` nameservers are Cloudflare (`april` / `neil`), registration is
-still GoDaddy and paid to **October 2029**. `intrinsics.app` is GoDaddy on
-`ns73/ns74.domaincontrol.com`.
+still GoDaddy and paid to **October 2029**. It is the only domain that
+matters now -- everything above is a subdomain of it.
+
+`intrinsics.app` is a GoDaddy 301 to `intrinsics.altorien.com` and nothing
+else. **It can be allowed to lapse.** When it does, old bookmarks to it stop
+working and nothing else changes.
 
 ## Day one on a new machine
 
@@ -85,27 +89,25 @@ none of it should be pushed to one. Copy that folder to a personal drive or
 iCloud **before Monday**. It is the only thing in this document that is
 genuinely unrecoverable.
 
-## Finishing the Intrinsics move
+## How Intrinsics is wired
 
-Intrinsics is still on GitHub Pages at `intrinsics.app`, which is a second
-domain you are paying for. To fold it under `altorien.com`:
+Done on 2026-10-31. Recorded because the arrangement is not obvious.
 
-1. Cloudflare → altorien.com → DNS → add **CNAME `intrinsics` →
-   `altorienl.github.io`**, proxy status **DNS only** (grey cloud). The grey
-   cloud is required: GitHub cannot issue its certificate through Cloudflare's
-   proxy.
-2. `bash tools/finish-intrinsics.sh` — rewrites the Pages CNAME file, pushes,
-   and repoints the links on altorien.com. It refuses to run until the DNS
-   record resolves, so the order cannot be got wrong.
-3. Wait for GitHub to issue the certificate (minutes), then check
-   `https://intrinsics.altorien.com`.
-4. Only then let `intrinsics.app` lapse, or set GoDaddy forwarding to the new
-   address so old links survive.
+GitHub Pages serves the repo root on the custom domain in the `CNAME` file,
+which now reads `intrinsics.altorien.com`. Cloudflare has a **CNAME
+`intrinsics` -> `altorienl.github.io`, DNS only (grey cloud)** -- the grey
+cloud is required, because GitHub cannot issue its certificate through
+Cloudflare's proxy. GoDaddy 301s the old `intrinsics.app` to the new address.
 
-Pages was kept rather than moving Intrinsics to a Worker on purpose: the
-nightly scan commits `grades.json` and Pages redeploys itself, where a Worker
-would need a Cloudflare API token in CI and would silently serve stale grades
-the day that token expired.
+Pages was kept rather than moving to a Worker on purpose: the nightly scan
+commits `grades.json` and Pages redeploys itself. A Worker would need a
+Cloudflare API token in CI and would serve stale grades silently the day that
+token expired, which is the wrong failure mode to leave behind.
+
+Changing the `CNAME` file takes the OLD hostname down the moment it is
+pushed -- Pages answers for one domain only. So the DNS record has to exist
+first. `tools/finish-intrinsics.sh` enforces that order and is kept for
+reference.
 
 ## Things that will bite
 
