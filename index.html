@@ -526,7 +526,62 @@ footer a:hover { color: var(--text); }
          script beats remembering to edit a footer every January. -->
     <div>Altorien Lockwood &middot; San Francisco &middot; <span id="yr">2026</span></div>
 </footer>
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* The contribution graph ships baked into this page at deploy time, so it
+ * renders instantly, needs no JavaScript and cannot be empty. This refreshes
+ * it from /contrib.json, which the Worker scrapes off the public GitHub
+ * profile -- no API token anywhere, nothing scheduled to rot.
+ *
+ * Every failure leaves the baked graph exactly where it is: a 204, a parse
+ * error, GitHub down, JS off. There is no path here that blanks the card. */
+(function () {
+    var grid = document.querySelector('.contrib .grid');
+    var line = document.querySelector('.contrib-line');
+    if (!grid || !fetch) return;
+    var RAMP = ['#e2ddd1', '#f0cf8e', '#e8a93a', '#c07c00', '#8a5600'];
+
+    fetch('/contrib.json').then(function (r) {
+        return r.status === 200 ? r.json() : null;
+    }).then(function (d) {
+        if (!d || !d.days || !d.days.length || !d.weeks) return;
+
+        /* Thresholds are relative to the busiest day, matching tools/contrib.js,
+         * so a refresh cannot make the page disagree with its own legend. */
+        var peak = Math.max(1, d.busiest.count || 1);
+        var frag = document.createDocumentFragment();
+        for (var w = 0; w < d.weeks; w++) {
+            var col = document.createElement('span');
+            col.className = 'gw';
+            for (var r2 = 0; r2 < 7; r2++) {
+                var day = d.days[w * 7 + r2];
+                var i = document.createElement('i');
+                if (day) {
+                    var n = day.count;
+                    var s = n === 0 ? 0 : n >= peak * 0.6 ? 4
+                          : n >= peak * 0.3 ? 3 : n >= peak * 0.12 ? 2 : 1;
+                    i.style.background = RAMP[s];
+                    i.title = day.date + ': ' + n;
+                } else { i.style.background = RAMP[0]; }
+                col.appendChild(i);
+            }
+            frag.appendChild(col);
+        }
+        grid.textContent = '';
+        grid.appendChild(frag);
+
+        if (line && d.busiest.date) {
+            var dt = new Date(d.busiest.date + 'T00:00:00Z');
+            line.innerHTML = '<b>' + d.total + '</b> contributions on <b>'
+                + d.activeDays + '</b> days &middot; busiest was <b>'
+                + d.busiest.count + '</b> on '
+                + dt.toLocaleDateString('en-US',
+                    { month: 'long', day: 'numeric', timeZone: 'UTC' });
+        }
+    }).catch(function () { /* baked graph stands */ });
+})();
+</script>
 
 </div>
 <script>

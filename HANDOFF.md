@@ -120,13 +120,18 @@ reference.
   wrangler config. Adding a route silently disables the `workers.dev`
   hostname, which breaks every `?t=` trip link ever shared, and a bare key
   placed after a `[[routes]]` block is parsed as part of it.
-- **The GitHub graph is baked at deploy time.** It is as old as the last
-  deploy. `node tools/contrib.js` refreshes it, and
-  `tools/refresh-workflow.yml` does it weekly once copied to
-  `.github/workflows/`. That copy has to happen in the GitHub web UI: the CLI
-  token lacks the `workflow` scope and the push is refused. It also needs a
-  `CLOUDFLARE_API_TOKEN` repository secret -- Cloudflare -> My Profile -> API
-  Tokens -> "Edit Cloudflare Workers" template.
+- **The GitHub graph updates itself.** `src/index.js` serves `/contrib.json`,
+  scraped from `github.com/users/altorienl/contributions` -- the PUBLIC
+  profile, so there is no API token anywhere and nothing scheduled that can
+  rot. Cached six hours at the edge. `index.html` also ships a copy baked at
+  deploy time by `tools/contrib.js`, and only replaces it if the fetch
+  succeeds, so the card is right with JavaScript off and right if GitHub is
+  down. Bump `V` in `src/index.js` if the JSON shape ever changes; the cache
+  key ignores the query string on purpose.
+- **That graph shows PUBLIC contributions only** -- 260 where the logged-in
+  profile says 340. GitHub -> Settings -> Profile -> "Include private
+  contributions on my profile" makes the public number the real one, and this
+  picks it up within six hours with no deploy.
 - **The footer year reads from the clock**, so it does not need touching in
   January. Dates in the experience list are literal and do not.
 - **`public/lander/index.html` is a copy of the front page**, on purpose. See

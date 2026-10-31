@@ -4,6 +4,11 @@
 name = "altorien"
 compatibility_date = "2026-10-30"
 
+# Top-level, like workers_dev, and for the same reason: a bare key placed
+# after a [[routes]] table is parsed as part of that table. This one got
+# absorbed into the www route and wrangler rejected the file.
+main = "src/index.js"
+
 # Explicit, and for the reason fly-with-friends learned the hard way: adding a
 # [[routes]] block turns the workers.dev hostname off by default. It must stay
 # ABOVE the route tables -- a bare key after [[routes]] is parsed as part of
@@ -23,3 +28,4 @@ custom_domain = true
 
 [assets]
 directory = "./public"
+binding = "ASSETS"
