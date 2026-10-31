@@ -522,7 +522,10 @@ footer a:hover { color: var(--text); }
 </section>
 
 <footer class="wrap" id="contact" style="padding-left:0;padding-right:0">
-    <div>Altorien Lockwood &middot; San Francisco &middot; 2026</div>
+    <!-- The year was hardcoded and would have said 2026 forever. One line of
+         script beats remembering to edit a footer every January. -->
+    <div>Altorien Lockwood &middot; San Francisco &middot; <span id="yr">2026</span></div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </footer>
 
 </div>

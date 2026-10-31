@@ -1,0 +1,61 @@
+# NOT ACTIVE WHERE IT SITS. Copy this to .github/workflows/refresh.yml to
+# turn it on -- it lives here because the CLI token used to create this
+# repo lacks GitHub's `workflow` scope and cannot push into that folder.
+# Easiest route: GitHub -> this repo -> Add file -> Create new file ->
+# name it .github/workflows/refresh.yml -> paste this -> commit.
+#
+# Keeps the site current without anyone remembering to.
+#
+# The GitHub contribution graph on the front page is baked into index.html at
+# deploy time -- that is deliberate, so the page makes no third-party request
+# when somebody opens it. The cost of that choice is that the graph is only as
+# fresh as the last deploy. This pays it: once a week, regenerate and ship.
+#
+# Needs one repository secret, CLOUDFLARE_API_TOKEN:
+#   Cloudflare dashboard -> My Profile -> API Tokens -> Create Token
+#   -> "Edit Cloudflare Workers" template -> restrict to this account
+#   then GitHub -> this repo -> Settings -> Secrets -> Actions -> New secret
+#
+# Without the secret the workflow fails loudly rather than deploying nothing,
+# which is the right way round: a red tick is visible, a stale graph is not.
+name: Refresh contribution graph
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'      # Mondays, 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate the graph
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node tools/contrib.js
+
+      - name: Stage the deploy directory
+        run: |
+          cp index.html resume.html favicon.svg public/
+          cp index.html public/lander/index.html
+
+      - name: Commit if the graph moved
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Refresh contribution graph"
+          git push
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
