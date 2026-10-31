@@ -4,5 +4,22 @@
 name = "altorien"
 compatibility_date = "2026-10-30"
 
+# Explicit, and for the reason fly-with-friends learned the hard way: adding a
+# [[routes]] block turns the workers.dev hostname off by default. It must stay
+# ABOVE the route tables -- a bare key after [[routes]] is parsed as part of
+# that table, and wrangler rejects the file.
+workers_dev = true
+
+# The apex and www, now that altorien.com is on Cloudflare nameservers. Until
+# today this Worker had no route and the domain served a GoDaddy parking
+# lander, which is a worse front page than no front page.
+[[routes]]
+pattern = "altorien.com"
+custom_domain = true
+
+[[routes]]
+pattern = "www.altorien.com"
+custom_domain = true
+
 [assets]
 directory = "./public"
