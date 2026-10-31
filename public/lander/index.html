@@ -323,7 +323,13 @@ section { padding: 46px 0 0; }
  * which is where a date belongs when it will not fit beside one. */
 .when { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
     color: var(--faint); letter-spacing: .06em; white-space: nowrap; }
-@media (max-width: 560px) {
+/* Measured rather than assumed: the widest pair is "Edrington" against
+ * "June 2023 — September 2024", which comes to about 345px inside a 349px
+ * column on a 393px phone. It fits, so the date stays on the right where it
+ * is scannable. The earlier rule dropped it onto its own line and left it
+ * floating between the company and the job title, which is what looked
+ * wrong. It only stacks below 360px, where it genuinely cannot fit. */
+@media (max-width: 360px) {
     .when { margin-left: 41px; width: 100%; }
 }
 .title { font-family: var(--mono); font-size: var(--t-0); color: var(--accent);
@@ -357,7 +363,11 @@ footer a { color: var(--muted); text-decoration: none; }
 footer a:hover { color: var(--text); }
 
 @media (max-width: 430px) {
+    /* The name is hidden here because the h1 underneath already says it. It
+     * was also the flex item with margin-right:auto holding the links to the
+     * right, so without it they slid left and sat under nothing. */
     nav .me { display: none; }
+    nav .wrap { justify-content: flex-end; }
 }
 @media (max-width: 420px) {
     :root { --t-6: 32px; --t-5: 25px; --t-4: 19px; }
