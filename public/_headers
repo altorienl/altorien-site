@@ -1,0 +1,11 @@
+# The whole reason /lander needed catching: a parking page cached for a year.
+# HTML revalidates from now on, so a bad deploy or another domain move cannot
+# strand somebody on a copy that no longer exists. Assets keep a real TTL --
+# they are versioned by content and never change under the same name.
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/*.svg
+  Cache-Control: public, max-age=604800
