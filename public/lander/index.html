@@ -155,6 +155,12 @@ h1 { font-size: var(--t-6); font-weight: 600; letter-spacing: -.028em; line-heig
 .socials a:active { color: var(--accent); }
 .socials a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .socials svg { width: 20px; height: 20px; display: block; }
+/* The envelope is the odd one out. Every other mark fills its viewBox edge
+ * to edge; an envelope is inherently wider than it is tall, so the same 20px
+ * box gave a glyph only 13px high and it read as a size mistake next to the
+ * others. Sized so the drawn shape matches their optical weight rather than
+ * so the boxes match. */
+.socials a[aria-label="Email"] svg { width: 26px; height: 26px; }
 
 /* The education row sits in the same list as the jobs, so it needs saying
  * that it is not one. A label rather than a second section: it is one word
