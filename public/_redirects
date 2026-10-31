@@ -1,0 +1,6 @@
+# /projects existed briefly and may have been shared. A 404 is a dead end for
+# anyone holding that link; the front page is the honest destination now that
+# the work lives there. Safe as a 301 -- unlike /lander, "/" serves real
+# content and carries no script that would send the browser back here.
+/projects     /    301
+/projects/*   /    301
