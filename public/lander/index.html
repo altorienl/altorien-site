@@ -324,7 +324,15 @@ section { padding: 46px 0 0; }
  * one employer. */
 .roles > li { border-top: 1px solid var(--rule); padding: 20px 0; }
 .roles > li:last-child { border-bottom: 1px solid var(--rule); }
-.role-head { display: flex; align-items: center; gap: 11px; flex-wrap: wrap; }
+/* baseline, not center. The date column became two lines when the city was
+ * added, and centering floated the company name between them instead of
+ * sitting it on the first one. Baseline aligns the h3 with the FIRST line of
+ * the date block, which is the pairing a reader is making.
+ *
+ * The logo opts out: an image on a baseline hangs its bottom edge there and
+ * drops below the text, so it centers against the name instead. */
+.role-head { display: flex; align-items: baseline; gap: 11px; flex-wrap: wrap; }
+.role-head .co { align-self: center; }
 /* Company marks come from each company's own favicon, downloaded once and
  * served from here. Hotlinking a logo API would put four third-party requests
  * on a page that otherwise makes none. */
