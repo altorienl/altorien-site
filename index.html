@@ -292,8 +292,12 @@ section { padding: 46px 0 0; }
  * the column scans on its own, which is the only thing anybody does with a
  * career list on a phone. */
 .roles { list-style: none; }
-.roles li { border-top: 1px solid var(--rule); padding: 20px 0; }
-.roles li:last-child { border-bottom: 1px solid var(--rule); }
+/* Direct children only. The promotion steps are a nested <ol> inside one of
+ * these, so an unscoped `.roles li` gave every sub-title its own full-width
+ * rule and 20px of padding -- four horizontal lines through the middle of
+ * one employer. */
+.roles > li { border-top: 1px solid var(--rule); padding: 20px 0; }
+.roles > li:last-child { border-bottom: 1px solid var(--rule); }
 .role-head { display: flex; align-items: center; gap: 11px; flex-wrap: wrap; }
 /* Company marks come from each company's own favicon, downloaded once and
  * served from here. Hotlinking a logo API would put four third-party requests
@@ -320,6 +324,24 @@ section { padding: 46px 0 0; }
     text-transform: uppercase; letter-spacing: .07em; margin-top: 7px; }
 .roles p { color: var(--muted); margin-top: 9px; font-size: var(--t-2); text-wrap: pretty; }
 
+
+/* Two titles at one employer, newest first, so the promotion is visible
+ * rather than implied by a slash. The rule down the left is what says these
+ * belong to the company above them and are not two more jobs -- the same
+ * thing LinkedIn draws, for the same reason. */
+.steps { list-style: none; margin: 11px 0 0 41px; border-left: 1px solid var(--edge);
+    padding-left: 15px; }
+.steps li { display: flex; align-items: baseline; gap: 12px; padding: 3px 0;
+    flex-wrap: wrap; }
+.step-t { font-family: var(--mono); font-size: var(--t-0); color: var(--accent);
+    text-transform: uppercase; letter-spacing: .07em; }
+.step-w { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
+    color: var(--faint); letter-spacing: .06em; white-space: nowrap; }
+@media (max-width: 560px) {
+    .steps { margin-left: 41px; }
+    .step-w { margin-left: 0; width: 100%; }
+    .steps li { padding: 5px 0; gap: 2px; }
+}
 
 /* ---------- footer ---------- */
 footer {
@@ -478,7 +500,12 @@ footer a:hover { color: var(--text); }
                 <h3>Lendlease</h3>
                 <span class="when">August 2019 &mdash; June 2023</span>
             </div>
-            <div class="title">Staff Accountant &middot; Junior Accountant</div>
+            <ol class="steps">
+                <li><span class="step-t">Staff Accountant</span>
+                    <span class="step-w">May 2021 &mdash; June 2023</span></li>
+                <li><span class="step-t">Junior Accountant</span>
+                    <span class="step-w">August 2019 &mdash; May 2021</span></li>
+            </ol>
             <p>Full-cycle and project cost accounting for multi-year developments:
                 capitalisation, cost-to-complete, and US GAAP statements.</p>
         </li>
