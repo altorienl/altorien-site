@@ -63,7 +63,17 @@ nav .me { color: var(--text); font-weight: 600; margin-right: auto; font-family:
     font-size: var(--t-2); text-transform: none; letter-spacing: -.01em; }
 
 header { padding: 44px 0 30px; }
+/* The location sits opposite the name rather than leading the contact row,
+ * which is what let the three links fit on one line instead of wrapping
+ * github.com/altorienl onto its own. Same dateline treatment as the front
+ * page, so the two headers read as one document. */
+.name-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 h1 { font-size: var(--t-6); font-weight: 600; letter-spacing: -.026em; line-height: 1.1; }
+.where {
+    font-family: var(--mono); font-size: var(--t-0);
+    text-transform: uppercase; letter-spacing: .13em;
+    color: var(--faint); white-space: nowrap;
+}
 .sub { font-family: var(--mono); font-size: var(--t-1); color: var(--accent);
     text-transform: uppercase; letter-spacing: .08em; margin-top: 12px; }
 .contact { margin-top: 12px; font-family: var(--mono); font-size: var(--t-1);
@@ -115,6 +125,8 @@ footer a { color: var(--muted); text-decoration: none; }
 
 @media (max-width: 460px) {
     :root { --t-6: 27px; --t-4: 18px; }
+    .name-row { display: block; }
+    .where { display: block; margin-top: 8px; }
     .skill { grid-template-columns: 1fr; gap: 4px; }
     .when { margin-left: 0; width: 100%; }
     .role-head, .proj-head { flex-wrap: wrap; }
@@ -145,10 +157,12 @@ footer a { color: var(--muted); text-decoration: none; }
 <div class="wrap">
 
 <header>
-    <h1>Altorien Lockwood</h1>
+    <div class="name-row">
+        <h1>Altorien Lockwood</h1>
+        <span class="where">San Francisco, CA</span>
+    </div>
     <div class="sub">Finance Analytics &middot; AI Engineering &amp; Enablement</div>
     <div class="contact">
-        <span>San Francisco, CA</span>
         <a href="mailto:Altorien.Lockwood@outlook.com">Altorien.Lockwood@outlook.com</a>
         <a href="https://www.linkedin.com/in/altorien/">linkedin.com/in/altorien</a>
         <a href="https://github.com/altorienl">github.com/altorienl</a>
