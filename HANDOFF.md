@@ -121,6 +121,13 @@ reference.
   hostname, which breaks every `?t=` trip link ever shared, and a bare key
   placed after a `[[routes]]` block is parsed as part of it.
 - **The GitHub graph is baked at deploy time.** It is as old as the last
-  deploy. Re-run `node tools/contrib.js` to refresh it.
+  deploy. `node tools/contrib.js` refreshes it, and
+  `tools/refresh-workflow.yml` does it weekly once copied to
+  `.github/workflows/`. That copy has to happen in the GitHub web UI: the CLI
+  token lacks the `workflow` scope and the push is refused. It also needs a
+  `CLOUDFLARE_API_TOKEN` repository secret -- Cloudflare -> My Profile -> API
+  Tokens -> "Edit Cloudflare Workers" template.
+- **The footer year reads from the clock**, so it does not need touching in
+  January. Dates in the experience list are literal and do not.
 - **`public/lander/index.html` is a copy of the front page**, on purpose. See
   LANDER.md.
