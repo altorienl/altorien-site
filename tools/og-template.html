@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* The share card. 1200x630 is what iMessage, Slack and every other unfurler
+ * crops to; anything else gets letterboxed or centre-cropped badly.
+ *
+ * Rendered headlessly from this file by tools/og.js rather than drawn in an
+ * image editor, so it uses the SAME tokens and the SAME type as the site. A
+ * card designed separately drifts from the page it advertises within two
+ * changes. */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  width:1200px; height:630px; background:#ece8e1; color:#17150f;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,system-ui,sans-serif;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:0 86px; position:relative; -webkit-font-smoothing:antialiased;
+}
+.kicker {
+  font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;
+  font-size:21px; letter-spacing:.17em; text-transform:uppercase;
+  color:#8a8275; margin-bottom:28px;
+}
+h1 { font-size:92px; font-weight:600; letter-spacing:-.03em; line-height:1.03; }
+.sub { font-size:33px; color:#5d574c; margin-top:26px; letter-spacing:-.012em; }
+.rule { position:absolute; left:86px; right:86px; bottom:132px; height:1px; background:#cfc8b9; }
+.foot {
+  position:absolute; left:86px; right:86px; bottom:68px;
+  display:flex; align-items:center; gap:18px;
+  font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;
+  font-size:21px; letter-spacing:.09em; text-transform:uppercase; color:#8a8275;
+}
+.foot b { color:#b36b00; font-weight:500; }
+.icons { margin-left:auto; display:flex; gap:14px; }
+.icons img { width:62px; height:62px; border-radius:14px; display:block; }
+</style></head><body>
+  <div class="kicker">Finance Analytics &middot; AI Engineering</div>
+  <h1>Altorien Lockwood</h1>
+  <div class="sub">I build the tooling finance runs on.</div>
+  <div class="rule"></div>
+  <div class="foot">
+    altorien.com &nbsp;&middot;&nbsp; <b>2 tools, live</b>
+    <span class="icons">
+      <img src="../public/icon-intrinsics.png">
+      <img src="../public/icon-fwf.png">
+    </span>
+  </div>
+</body></html>
