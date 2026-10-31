@@ -335,38 +335,17 @@ section { padding: 46px 0 0; }
  * rather than implied by a slash. The rule down the left is what says these
  * belong to the company above them and are not two more jobs -- the same
  * thing LinkedIn draws, for the same reason. */
-/* A promotion, drawn as one. Two titles stacked flat read as two unrelated
- * lines; what says "he moved up inside this company" is a spine with a node
- * on it per step, which is the shape everybody already knows from LinkedIn.
- *
- * The spine is inset under the logo so it hangs off the company above it,
- * and it stops at the last node rather than running past -- a line that
- * continues into the paragraph below implies another step that is not there.
- * That was the first version and it is what the owner circled. */
-.steps { list-style: none; margin: 14px 0 2px 41px; padding-left: 20px;
-    position: relative; }
-.steps::before {
-    content: ''; position: absolute; left: 0; top: 9px; bottom: 9px;
-    width: 1px; background: var(--rule);
-}
-.steps li { display: flex; align-items: baseline; gap: 12px; padding: 7px 0;
-    flex-wrap: wrap; position: relative; }
-.steps li::before {
-    content: ''; position: absolute; left: -24px; top: 8px;
-    width: 9px; height: 9px; border-radius: 50%;
-    background: var(--bg); border: 1.5px solid var(--rule);
-}
-/* The current title is filled, the one he was promoted out of is hollow. */
-.steps li:first-child::before { background: var(--accent); border-color: var(--accent); }
 .step-t { font-family: var(--mono); font-size: var(--t-0); color: var(--accent);
     text-transform: uppercase; letter-spacing: .07em; }
 .step-w { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
     color: var(--faint); letter-spacing: .06em; white-space: nowrap; }
-@media (max-width: 560px) {
-    .steps { margin-left: 41px; }
-    .step-w { margin-left: 0; width: 100%; }
-    .steps li { padding: 5px 0; gap: 2px; }
-}
+
+/* The promotion, said rather than drawn. A spine with nodes on it was the
+ * only widget on a page made entirely of hairlines and space, and it read as
+ * a gadget bolted on -- which is what the owner saw. This is the same .title
+ * row every other job uses, with the previous role trailing it in the muted
+ * colour, so the fact is visible and nothing new had to be invented. */
+.from { color: var(--faint); text-transform: none; letter-spacing: .01em; }
 
 /* ---------- footer ---------- */
 footer {
@@ -525,12 +504,8 @@ footer a:hover { color: var(--text); }
                 <h3>Lendlease</h3>
                 <span class="when">August 2019 &mdash; June 2023</span>
             </div>
-            <ol class="steps">
-                <li><span class="step-t">Staff Accountant</span>
-                    <span class="step-w">June 2021 &mdash; June 2023</span></li>
-                <li><span class="step-t">Junior Accountant</span>
-                    <span class="step-w">August 2019 &mdash; June 2021</span></li>
-            </ol>
+            <div class="title">Staff Accountant <span class="from">&larr; promoted from
+                Junior Accountant, June 2021</span></div>
             <p>Full-cycle and project cost accounting for multi-year developments:
                 capitalisation, cost-to-complete, and US GAAP statements.</p>
         </li>
@@ -542,7 +517,6 @@ footer a:hover { color: var(--text); }
                 <span class="when">May 2019</span>
             </div>
             <div class="title">B.S. Accounting &middot; GPA 3.85</div>
-            <p>John Chambers College of Business &amp; Economics.</p>
         </li>
     </ol>
 </section>
