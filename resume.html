@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Resume &middot; Altorien Lockwood</title>
+<meta name="description" content="Altorien Lockwood — Strategic Finance Senior Associate at Rippling. Finance analytics and AI engineering.">
+<meta name="theme-color" content="#ece8e1">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+/* The resume, as a page rather than a PDF in a viewer.
+ *
+ * Shares index.html's tokens on purpose but is NOT a shared stylesheet: two
+ * files, two <style> blocks, no extra request on either. If a third page ever
+ * arrives, that is the moment to extract tokens.css, not before.
+ *
+ * Light only, same as the front page, and the print rules below matter more
+ * than usual here -- the single most likely thing a reader does with this page
+ * is Cmd-P it. Printing drops the nav, unrolls the colours to black on white,
+ * and keeps each role from breaking across a page. */
+:root {
+    --bg: #ece8e1; --card: #f5f2ec; --text: #17150f; --muted: #5d574c;
+    --faint: #8a8275; --edge: #ddd7cb; --rule: #cfc8b9; --accent: #b36b00;
+    --t-0: 11px; --t-1: 13px; --t-2: 15px; --t-3: 17px; --t-4: 21px; --t-6: 34px;
+    --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, system-ui, sans-serif;
+    font-size: var(--t-2); line-height: 1.55; -webkit-font-smoothing: antialiased;
+    padding-bottom: 60px;
+}
+.wrap { max-width: 720px; margin: 0 auto;
+    padding-left: max(22px, env(safe-area-inset-left));
+    padding-right: max(22px, env(safe-area-inset-right)); }
+
+nav { position: sticky; top: 0; z-index: 10; background: var(--bg);
+    border-bottom: 1px solid var(--edge); padding-top: max(10px, env(safe-area-inset-top)); }
+nav .wrap { display: flex; align-items: center; gap: 18px; height: 46px; }
+nav a { color: var(--muted); text-decoration: none; font-size: var(--t-0);
+    font-family: var(--mono); text-transform: uppercase; letter-spacing: .09em; }
+nav a:hover { color: var(--text); }
+nav .me { color: var(--text); font-weight: 600; margin-right: auto; font-family: inherit;
+    font-size: var(--t-2); text-transform: none; letter-spacing: -.01em; }
+
+header { padding: 44px 0 30px; }
+h1 { font-size: var(--t-6); font-weight: 600; letter-spacing: -.026em; line-height: 1.1; }
+.sub { font-family: var(--mono); font-size: var(--t-1); color: var(--accent);
+    text-transform: uppercase; letter-spacing: .08em; margin-top: 12px; }
+.contact { margin-top: 12px; font-family: var(--mono); font-size: var(--t-1);
+    color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
+.contact a { color: var(--muted); text-decoration: none; }
+.contact a:hover { color: var(--accent); }
+.summary { margin-top: 20px; color: var(--muted); text-wrap: pretty; }
+.summary strong { color: var(--text); font-weight: 500; }
+
+h2 { font-family: var(--mono); font-size: var(--t-0); text-transform: uppercase;
+    letter-spacing: .11em; color: var(--faint); font-weight: 500;
+    margin-top: 42px; padding-bottom: 9px; border-bottom: 1px solid var(--rule); }
+
+.role { padding: 20px 0; border-bottom: 1px solid var(--edge); break-inside: avoid; }
+.role-head { display: flex; align-items: baseline; gap: 12px; }
+.role h3 { font-size: var(--t-4); font-weight: 600; letter-spacing: -.018em; }
+.when { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
+    color: var(--faint); letter-spacing: .06em; white-space: nowrap; }
+.title { font-family: var(--mono); font-size: var(--t-0); color: var(--accent);
+    text-transform: uppercase; letter-spacing: .07em; margin-top: 7px; }
+.scope { margin-top: 10px; color: var(--text); text-wrap: pretty; }
+ul.pts { list-style: none; margin-top: 10px; }
+ul.pts li { color: var(--muted); padding: 4px 0 4px 16px; position: relative; text-wrap: pretty; }
+ul.pts li::before { content: '›'; position: absolute; left: 0; color: var(--faint); }
+ul.pts b { color: var(--text); font-weight: 500; }
+
+.proj { padding: 16px 0; border-bottom: 1px solid var(--edge); break-inside: avoid; }
+.proj-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.proj h3 { font-size: var(--t-3); font-weight: 600; letter-spacing: -.015em; }
+.proj h3 a { color: inherit; text-decoration: none; }
+.proj h3 a:hover { color: var(--accent); }
+.meta { font-family: var(--mono); font-size: var(--t-0); color: var(--faint);
+    letter-spacing: .05em; }
+.proj p { color: var(--muted); margin-top: 7px; text-wrap: pretty; }
+
+.skill { display: grid; grid-template-columns: 150px 1fr; gap: 16px;
+    padding: 10px 0; border-bottom: 1px solid var(--edge); break-inside: avoid; }
+.skill dt { font-family: var(--mono); font-size: var(--t-0); text-transform: uppercase;
+    letter-spacing: .07em; color: var(--faint); padding-top: 3px; }
+.skill dd { color: var(--muted); font-size: var(--t-1); }
+
+.edu { padding: 14px 0; border-bottom: 1px solid var(--edge); }
+.edu b { font-weight: 500; }
+.edu span { color: var(--muted); }
+
+footer { margin-top: 44px; font-family: var(--mono); font-size: var(--t-0);
+    text-transform: uppercase; letter-spacing: .08em; color: var(--faint); }
+footer a { color: var(--muted); text-decoration: none; }
+
+@media (max-width: 460px) {
+    :root { --t-6: 27px; --t-4: 18px; }
+    .skill { grid-template-columns: 1fr; gap: 4px; }
+    .when { margin-left: 0; width: 100%; }
+    .role-head, .proj-head { flex-wrap: wrap; }
+}
+
+/* Cmd-P is the most likely thing anyone does here. */
+@media print {
+    nav, footer { display: none; }
+    :root { --bg: #fff; --text: #000; --muted: #333; --faint: #666;
+            --edge: #ddd; --rule: #999; --accent: #000; }
+    body { padding: 0; font-size: 10.5pt; line-height: 1.4; }
+    .wrap { max-width: none; padding: 0; }
+    header { padding: 0 0 12px; }
+    h2 { margin-top: 20px; }
+    a { color: #000 !important; text-decoration: none; }
+    .role, .proj, .skill { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+    <a class="me" href="/">Altorien Lockwood</a>
+    <a href="/#work">Work</a>
+    <a href="/#exp">Experience</a>
+    <a href="/#about">About</a>
+    <a href="/projects">Projects</a>
+</div></nav>
+
+<div class="wrap">
+
+<header>
+    <h1>Altorien Lockwood</h1>
+    <div class="sub">Finance Analytics &middot; AI Engineering &amp; Enablement</div>
+    <div class="contact">
+        <span>San Francisco, CA</span>
+        <a href="mailto:Altorien.Lockwood@outlook.com">Altorien.Lockwood@outlook.com</a>
+        <a href="https://www.linkedin.com/in/altorien/">linkedin.com/in/altorien</a>
+        <a href="https://github.com/altorienl">github.com/altorienl</a>
+    </div>
+    <p class="summary">Finance analyst who builds the tooling finance runs on. I author the
+        agent skills my team invokes by name, ship Python applications in production, and have
+        owned FP&amp;A for a <strong>$1.3B technology OpEx portfolio</strong>. AI-assisted
+        development is my primary workflow rather than an accessory: I design the workflow,
+        write the prompt, and validate the output before it reaches a stakeholder. The rare
+        part is the translation layer &mdash; I speak to the model and to the senior finance
+        leader who has never opened a terminal.</p>
+</header>
+
+<h2>Experience</h2>
+
+<div class="role">
+    <div class="role-head"><h3>Rippling</h3><span class="when">Nov 2026 &mdash; Present</span></div>
+    <div class="title">Strategic Finance Senior Associate &middot; R&amp;D Strategic Finance</div>
+    <p class="scope">Finance partner to the R&amp;D organisation, owning the financial models
+        behind infrastructure spend as the product portfolio moves into lines with different
+        cost structures and pricing constructs.</p>
+    <ul class="pts">
+        <li>Own bottoms-up <b>infrastructure forecasts</b> and actuals tracking, translating
+            cost drivers into narratives Engineering and Product leadership act on.</li>
+        <li>Develop <b>unit cost frameworks</b> for product lines operating outside the current
+            pricing model, including cost attribution and margin structure for AI-native
+            product experiences.</li>
+        <li>Partner with Engineering on infrastructure investment decisions and cost efficiency,
+            and establish month-end reporting processes with Accounting.</li>
+    </ul>
+</div>
+
+<div class="role">
+    <div class="role-head"><h3>Indeed</h3><span class="when">Oct 2024 &ndash; Oct 2026</span></div>
+    <div class="title">Financial Analyst, R&amp;D &middot; Technology &amp; Infrastructure Finance</div>
+    <p class="scope">Sole FP&amp;A owner for Business Technology &amp; Transformation, a
+        <strong>$1.3B annual OpEx portfolio</strong> spanning headcount and non-headcount spend
+        across cloud, data infrastructure, SRE and AI compute.</p>
+    <ul class="pts">
+        <li>Owned the full planning and reporting cycle: annual operating plan, 18-month rolling
+            forecast, monthly reforecast, and budget versus actuals.</li>
+        <li>Built the <b>AI compute unit economics model</b> establishing roughly $2 to $3 of
+            supporting infrastructure cost per $1 of direct LLM spend, and identified utilisation
+            as the primary risk driver in build-versus-rent decisions.</li>
+        <li>Built the seat-level usage model that let Procurement commit to forecasted
+            consumption in a vendor contract negotiation, <b>securing a 12% discount</b>.</li>
+        <li>Replaced recurring manual analysis with <b>governed Snowflake pipelines</b> and
+            automated SQL, plus the Tableau and Streamlit layer engineering leaders use for
+            self-service visibility into spend against budget.</li>
+        <li>Owned headcount planning and fully loaded run-rate builds by job profile and
+            position: salary, sign-on, bonus and fringe.</li>
+    </ul>
+</div>
+
+<div class="role">
+    <div class="role-head"><h3>Edrington</h3><span class="when">Jun 2023 &ndash; Sep 2024</span></div>
+    <div class="title">Financial Analyst, FP&amp;A</div>
+    <ul class="pts">
+        <li>Modelled revenue, margin, pricing and volume assumptions across the commercial
+            portfolio, with scenario and sensitivity analysis on pricing strategy.</li>
+        <li>Supported operating cash flow and working capital analysis, including vendor payment
+            timing and balance sheet drivers.</li>
+        <li>Built a real-time <b>Power BI tracker</b> integrating shipments, actuals and open
+            orders for live revenue and fulfilment visibility.</li>
+    </ul>
+</div>
+
+<div class="role">
+    <div class="role-head"><h3>Lendlease</h3><span class="when">Aug 2019 &ndash; Jun 2023</span></div>
+    <div class="title">Staff Accountant (2021&ndash;2023) &middot; Junior Accountant (2019&ndash;2021)</div>
+    <ul class="pts">
+        <li>Owned full-cycle and project cost accounting for multi-year developments, including
+            capitalisation, cost-to-complete tracking and <b>US GAAP</b> financial statements.</li>
+        <li>Partnered with project managers on budgeting, forecasting and cash flow planning,
+            and with FP&amp;A on variance analysis.</li>
+    </ul>
+</div>
+
+<h2>AI Engineering &amp; Enablement</h2>
+
+<div class="proj">
+    <div class="proj-head"><h3>FP&amp;Ai Weekly Stand Up</h3>
+        <span class="meta">Internal program &middot; founded and run by me</span></div>
+    <p>Recurring program getting an FP&amp;A team onto agentic tooling: Claude Code extensions
+        in Cursor, MCP server setup from the terminal, and governed Snowflake connections so
+        analysts pull data through Claude instead of rebuilding variance waterfalls by hand.</p>
+</div>
+
+<div class="proj">
+    <div class="proj-head"><h3>Finance Agent Skill Library</h3>
+        <span class="meta">YAML + Markdown &middot; 5 skills &middot; production</span></div>
+    <p>Invokable skills encoding run-rate builds, budget template QA, Snowflake variance, ROI
+        cases and post-investment lookback. A non-technical analyst invokes one by name and gets
+        analyst-quality output from a single prompt.</p>
+</div>
+
+<div class="proj">
+    <div class="proj-head"><h3>ROI Calculation Engine</h3>
+        <span class="meta">Python, type-hinted &middot; actively maintained</span></div>
+    <p>Shares a constants file and input contract with a parallel JavaScript engine, with
+        numerical parity enforced by golden-fixture tests. Unsupported inputs raise rather than
+        silently returning a different number than the web app.</p>
+</div>
+
+<div class="proj">
+    <div class="proj-head"><h3>Finance Chat API &middot; Team MCP Servers</h3>
+        <span class="meta">FastAPI, Anthropic SDK, Snowflake</span></div>
+    <p>A service answering finance questions against the warehouse, with prompt, scope and
+        routing in separate modules. Plus MCP servers exposing governed finance data to AI agents
+        as shared team infrastructure.</p>
+</div>
+
+<h2>Shipped Solo</h2>
+
+<div class="proj">
+    <div class="proj-head"><h3><a href="https://intrinsics.app">Intrinsics</a></h3>
+        <span class="meta">JavaScript &middot; 238 commits &middot; live, GitHub Actions CI/CD</span></div>
+    <p>Stock analysis progressive web app. Eight ratios and a plain-English grade for any US
+        stock, benchmarked against its own sector rather than the whole market. No login.</p>
+</div>
+
+<div class="proj">
+    <div class="proj-head"><h3><a href="https://fly.altorien.com">Fly with Friends</a></h3>
+        <span class="meta">JavaScript, Cloudflare Workers &middot; 84 commits &middot; live</span></div>
+    <p>Finds the flights that land a group from different cities at one airport together, and
+        prices what that closeness costs. 578 checks across 12 suites; the optimiser's objective
+        is priced in stated units after measurement found it overpaying $387 to buy 45 minutes.</p>
+</div>
+
+<h2>Technical Skills</h2>
+<dl>
+    <div class="skill"><dt>AI Development</dt><dd>Claude Code (primary development environment,
+        daily), Cursor, agent skill authoring (YAML + Markdown), MCP server development, prompt
+        design, output evaluation and quality gating</dd></div>
+    <div class="skill"><dt>Python</dt><dd>Streamlit, FastAPI, pandas, numpy, plotly, Anthropic
+        SDK, snowflake-connector-python, type hints, test suites, shared engine modules,
+        caching</dd></div>
+    <div class="skill"><dt>SQL &amp; Data</dt><dd>Advanced SQL (CTEs, window functions),
+        Snowflake, governed data extraction, data definitions and refresh contracts</dd></div>
+    <div class="skill"><dt>Web &amp; Version Control</dt><dd>TypeScript, React / Next.js,
+        JavaScript, HTML; Git (branches, pull requests, code review), GitHub Actions CI/CD,
+        GitLab, Cloudflare Workers</dd></div>
+    <div class="skill"><dt>BI &amp; Reporting</dt><dd>Tableau, Power BI, Excel (Power Query,
+        PivotTables, Macros), multi-tab formatted exports</dd></div>
+    <div class="skill"><dt>Finance</dt><dd>Financial modelling, driver-based forecasting, OpEx
+        and headcount planning, unit economics, ROI and payback analysis, revenue and margin
+        modelling, US GAAP, R&amp;D capitalisation</dd></div>
+</dl>
+
+<h2>Certifications &amp; Education</h2>
+<div class="edu"><b>CPA Candidate</b> &mdash; <span>3 of 4 sections passed (FAR, REG, ISC).
+    AUD scheduled November 2026, licensure expected Q1 2027.</span></div>
+<div class="edu"><b>West Virginia University</b> &mdash; <span>John Chambers College of Business
+    &amp; Economics. B.S. Accounting, May 2019. GPA 3.85.</span></div>
+
+<footer><a href="/">&larr; altorien.com</a></footer>
+
+</div>
+</body>
+</html>
