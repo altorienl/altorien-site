@@ -342,7 +342,12 @@ section { padding: 46px 0 0; }
  * still sits hard right; on a phone it drops to its own line under the name,
  * which is where a date belongs when it will not fit beside one. */
 .when { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
-    color: var(--faint); letter-spacing: .06em; white-space: nowrap; }
+    color: var(--faint); letter-spacing: .06em; white-space: nowrap;
+    text-align: right; }
+/* The city, under its dates and in the same mono -- when and where are the
+ * same kind of fact about a job, so they share a column and a typeface
+ * rather than the location being prose somewhere else in the row. */
+.when em { display: block; font-style: normal; margin-top: 3px; }
 /* Measured rather than assumed: the widest pair is "Edrington" against
  * "June 2023 — September 2024", which comes to about 345px inside a 349px
  * column on a 393px phone. It fits, so the date stays on the right where it
@@ -497,7 +502,7 @@ footer a:hover { color: var(--text); }
             <div class="role-head">
                 <img class="co" src="logo/rippling.png" alt="" width="30" height="30" loading="lazy">
                 <h3>Rippling</h3>
-                <span class="when">November 2026 &mdash; Present</span>
+                <span class="when">November 2026 &mdash; Present<em>San Francisco, CA</em></span>
             </div>
             <div class="title">Strategic Finance Senior Associate &middot; R&amp;D</div>
             <p>Infrastructure economics for a product portfolio moving beyond its current
@@ -507,7 +512,7 @@ footer a:hover { color: var(--text); }
             <div class="role-head">
                 <img class="co" src="logo/indeed.png" alt="" width="30" height="30" loading="lazy">
                 <h3>Indeed</h3>
-                <span class="when">October 2024 &mdash; October 2026</span>
+                <span class="when">October 2024 &mdash; October 2026<em>New York, NY</em></span>
             </div>
             <div class="title">Financial Analyst, R&amp;D</div>
             <p>FP&amp;A owner for a $1.3B annual technology OpEx portfolio across cloud,
@@ -517,7 +522,7 @@ footer a:hover { color: var(--text); }
             <div class="role-head">
                 <img class="co" src="logo/edrington.png" alt="" width="30" height="30" loading="lazy">
                 <h3>Edrington</h3>
-                <span class="when">June 2023 &mdash; September 2024</span>
+                <span class="when">June 2023 &mdash; September 2024<em>New York, NY</em></span>
             </div>
             <div class="title">Financial Analyst</div>
             <p>Revenue, margin, pricing and volume modeling across the commercial portfolio,
@@ -527,7 +532,7 @@ footer a:hover { color: var(--text); }
             <div class="role-head">
                 <img class="co" src="logo/lendlease.png" alt="" width="30" height="30" loading="lazy">
                 <h3>Lendlease</h3>
-                <span class="when">August 2019 &mdash; June 2023</span>
+                <span class="when">August 2019 &mdash; June 2023<em>New York, NY</em></span>
             </div>
             <div class="title">Staff Accountant</div>
             <p>Full-cycle and project cost accounting for multi-year developments:
@@ -538,7 +543,7 @@ footer a:hover { color: var(--text); }
             <div class="role-head">
                 <img class="co" src="logo/wvu.png" alt="" width="30" height="30" loading="lazy">
                 <h3>West Virginia University</h3>
-                <span class="when">May 2019</span>
+                <span class="when">May 2019<em>Morgantown, WV</em></span>
             </div>
             <div class="title">B.S. Accounting &middot; GPA 3.85</div>
         </li>
