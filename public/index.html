@@ -179,7 +179,7 @@ section { padding: 46px 0 0; }
  * The whole card is the anchor, not the title inside it. A 68px icon next to
  * a 17px line of text is a much bigger tap target than the words alone, and
  * on a phone that is the entire difference between "a link" and "an app". */
-.entry { border-top: 1px solid var(--rule); padding: 24px 0; }
+.entry { border-top: 1px solid var(--rule); padding: 20px 0; }
 .entry:last-of-type { border-bottom: 1px solid var(--rule); }
 
 .app {
@@ -211,37 +211,6 @@ section { padding: 46px 0 0; }
 .num { font-family: var(--mono); font-size: var(--t-1); color: var(--faint); }
 .ver { font-family: var(--mono); font-size: var(--t-0); color: var(--faint);
     text-transform: uppercase; letter-spacing: .07em; margin-left: auto; }
-.what {
-    font-family: var(--mono); font-size: var(--t-0); letter-spacing: .07em;
-    text-transform: uppercase; margin-top: 12px;
-}
-.p-int .what { color: var(--intrinsics); }
-.p-fwf .what { color: var(--fwf); }
-.entry p.d { color: var(--muted); margin-top: 10px; text-wrap: pretty; }
-
-/* Receipts. One per line, mono, no bullets -- a list of figures reads as a
- * list of figures; dressing it as prose hides the only part worth scanning. */
-.facts { list-style: none; margin-top: 14px; }
-.facts li {
-    font-family: var(--mono); font-size: var(--t-1); color: var(--muted);
-    padding: 3px 0 3px 15px; position: relative;
-}
-.facts li::before { content: '›'; position: absolute; left: 0; color: var(--faint); }
-.facts b { color: var(--text); font-weight: 500; }
-
-pre {
-    margin-top: 16px; background: var(--card); border: 1px solid var(--edge);
-    border-radius: 7px; padding: 14px 15px; overflow-x: auto;
-    font-family: var(--mono); font-size: 12px; line-height: 1.6; color: #2c2920;
-    -webkit-overflow-scrolling: touch;
-}
-pre .c { color: var(--faint); }
-
-.visit {
-    display: inline-block; margin-top: 16px; font-family: var(--mono);
-    font-size: var(--t-1); color: var(--accent); text-decoration: none;
-}
-.visit:hover { text-decoration: underline; }
 
 /* ---------- experience ----------
  * A timeline without a timeline graphic. Dates are mono and right-aligned so
@@ -254,8 +223,14 @@ pre .c { color: var(--faint); }
 /* Company marks come from each company's own favicon, downloaded once and
  * served from here. Hotlinking a logo API would put four third-party requests
  * on a page that otherwise makes none. */
-.co { width: 30px; height: 30px; border-radius: 7px; object-fit: contain;
-    background: #fff; flex-shrink: 0; border: 1px solid var(--edge); padding: 2px; }
+/* No background, no border, no padding. The first version gave every mark a
+ * white tile, which put a visible box around the two logos that already carry
+ * their own field -- Rippling's purple and Edrington's teal -- and made them
+ * look pasted on. The radius still applies, so those two read as rounded
+ * tiles, while Indeed's and Lendlease's transparent marks sit directly on the
+ * page. Each logo is then shown the way its owner draws it. */
+.co { width: 30px; height: 30px; border-radius: 6px; object-fit: contain;
+    flex-shrink: 0; }
 .roles h3 { font-size: var(--t-3); font-weight: 600; letter-spacing: -.015em; }
 .when { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
     color: var(--faint); letter-spacing: .06em; white-space: nowrap; }
@@ -309,9 +284,9 @@ footer .links { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; 
 
     <dl class="status">
         <div><dt>Currently</dt>
-            <span class="on">Strategic Finance Senior Associate, Rippling &middot; from 2026.11.02</span></div>
+            <span class="on">Strategic Finance Senior Associate, Rippling</span></div>
         <div><dt>Before</dt>
-            <span>Indeed &middot; FP&amp;A for a $1.3B technology OpEx portfolio</span></div>
+            <span>Indeed &middot; Financial Analyst, R&amp;D</span></div>
         <div><dt>Shipped</dt>
             <span>2 tools, live, solo, no login on either</span></div>
     </dl>
@@ -350,16 +325,6 @@ footer .links { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; 
             </span>
             <span class="open" aria-hidden="true">&rsaquo;</span>
         </a>
-        <div class="what">Stock health, benchmarked against its own sector</div>
-        <p class="d">Eight ratios and a plain-English grade for any US stock, scored against
-            the sector it competes in rather than against the whole market. A utility and a
-            biotech do not have the same healthy balance sheet, and grading them on one curve
-            is the mistake the tool exists to avoid.</p>
-        <ul class="facts">
-            <li><b>Progressive web app</b>, installable, no login, no account</li>
-            <li><b>GitHub Actions</b> refreshes the grades on a schedule</li>
-            <li>Built and shipped <b>solo</b> against a market data API</li>
-        </ul>
     </article>
 
     <article class="entry p-fwf">
@@ -376,29 +341,6 @@ footer .links { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; 
             </span>
             <span class="open" aria-hidden="true">&rsaquo;</span>
         </a>
-        <div class="what">Flights that land a group together, and what that costs</div>
-        <p class="d">Three or more people leave from different cities and want to arrive at
-            one airport at the same time. The app solves for the tightest arrival window the
-            group can actually make, then prices what that closeness costs against simply
-            booking the cheapest flights and meeting whenever.</p>
-        <ul class="facts">
-            <li><b>578 checks</b> across 12 suites, every one verified able to fail</li>
-            <li><b>3,643 airports</b>, metro groupings resolved from the origin side</li>
-            <li>Found and fixed a <b>$387 overcharge</b> the old objective could not see</li>
-        </ul>
-<pre><span class="c">// What a plan costs the group, in one currency. Replaced two rules
-// that had no units between them -- a veto that priced a connection
-// at infinity while the same file priced it at $120, and a loop that
-// took the first discount and refused every later one. On a live
-// search that pair recommended $1,086 with $699 sitting in its own
-// ladder, thrown away.</span>
-function tripScore(r) {
-    return r.total                              <span class="c">// real money</span>
-        + SPREAD_PER_MIN * r.worst              <span class="c">// $1.50/min apart</span>
-        + EASE_PER_STOP  * r.regret.stops       <span class="c">// a connection</span>
-        + EASE_PER_MIN   * r.regret.mins        <span class="c">// time in the air</span>
-        + r.late;                               <span class="c">// landing at 1am</span>
-}</pre>
     </article>
 </section>
 
