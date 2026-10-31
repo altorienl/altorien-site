@@ -335,10 +335,29 @@ section { padding: 46px 0 0; }
  * rather than implied by a slash. The rule down the left is what says these
  * belong to the company above them and are not two more jobs -- the same
  * thing LinkedIn draws, for the same reason. */
-.steps { list-style: none; margin: 11px 0 0 41px; border-left: 1px solid var(--edge);
-    padding-left: 15px; }
-.steps li { display: flex; align-items: baseline; gap: 12px; padding: 3px 0;
-    flex-wrap: wrap; }
+/* A promotion, drawn as one. Two titles stacked flat read as two unrelated
+ * lines; what says "he moved up inside this company" is a spine with a node
+ * on it per step, which is the shape everybody already knows from LinkedIn.
+ *
+ * The spine is inset under the logo so it hangs off the company above it,
+ * and it stops at the last node rather than running past -- a line that
+ * continues into the paragraph below implies another step that is not there.
+ * That was the first version and it is what the owner circled. */
+.steps { list-style: none; margin: 14px 0 2px 41px; padding-left: 20px;
+    position: relative; }
+.steps::before {
+    content: ''; position: absolute; left: 0; top: 9px; bottom: 9px;
+    width: 1px; background: var(--rule);
+}
+.steps li { display: flex; align-items: baseline; gap: 12px; padding: 7px 0;
+    flex-wrap: wrap; position: relative; }
+.steps li::before {
+    content: ''; position: absolute; left: -24px; top: 8px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 1.5px solid var(--rule);
+}
+/* The current title is filled, the one he was promoted out of is hollow. */
+.steps li:first-child::before { background: var(--accent); border-color: var(--accent); }
 .step-t { font-family: var(--mono); font-size: var(--t-0); color: var(--accent);
     text-transform: uppercase; letter-spacing: .07em; }
 .step-w { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
@@ -508,9 +527,9 @@ footer a:hover { color: var(--text); }
             </div>
             <ol class="steps">
                 <li><span class="step-t">Staff Accountant</span>
-                    <span class="step-w">May 2021 &mdash; June 2023</span></li>
+                    <span class="step-w">June 2021 &mdash; June 2023</span></li>
                 <li><span class="step-t">Junior Accountant</span>
-                    <span class="step-w">August 2019 &mdash; May 2021</span></li>
+                    <span class="step-w">August 2019 &mdash; June 2021</span></li>
             </ol>
             <p>Full-cycle and project cost accounting for multi-year developments:
                 capitalisation, cost-to-complete, and US GAAP statements.</p>
