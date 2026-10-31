@@ -70,18 +70,31 @@ cal.weeks.forEach((w, i) => {
   last = m; lastCol = i;
 });
 
+/* The grid alone is a grid. The owner's note: somebody who is not technical
+ * has no idea what it is, and this page is read by finance people. So it is
+ * labelled in words, says what a square means, and the whole block is a link
+ * to the profile so the claim can be checked in one tap. The octocat mark is
+ * there because it is the one piece of this that is recognised without
+ * reading anything. */
 const block = `<!--CONTRIB-->
-    <div class="contrib">
-        <div class="contrib-line">
-            <b>${cal.totalContributions}</b> contributions &middot;
-            <b>${active}</b> active days &middot; busiest
-            <b>${busiest.contributionCount}</b> on ${busiest.date}
+    <a class="contrib" href="https://github.com/${LOGIN}">
+        <div class="contrib-head">
+            <svg viewBox="0 0 16 16" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            <b>GitHub</b>
+            <span class="contrib-what">one square per day, last 12 months</span>
+            <span class="contrib-go" aria-hidden="true">&rsaquo;</span>
         </div>
         <div class="gmonths">${months.join('')}</div>
         <div class="grid" aria-hidden="true">${cols}</div>
-        <div class="glegend"><span>Less</span>${
+        <div class="glegend"><span>Fewer</span>${
           RAMP.map(c => `<i style="background:${c}"></i>`).join('')}<span>More</span></div>
-    </div>
+        <div class="contrib-line">
+            <b>${cal.totalContributions}</b> contributions on
+            <b>${active}</b> days &middot; busiest was <b>${busiest.contributionCount}</b>
+            on ${new Date(busiest.date + 'T00:00:00Z').toLocaleDateString('en-US',
+              { month: 'long', day: 'numeric', timeZone: 'UTC' })}
+        </div>
+    </a>
     <!--/CONTRIB-->`;
 
 const file = __dirname + '/../index.html';
