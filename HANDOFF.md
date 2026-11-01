@@ -7,6 +7,42 @@ Written 2026-10-31, because this laptop gets wiped by a former employer on
 GitHub under `altorienl`, and everything that actually serves traffic runs in
 a Cloudflare account that is yours. The laptop was only ever a place to type.
 
+## Before the laptop goes — the last-day list
+
+Written Sunday 2026-11-01, the day before the wipe. Everything here is
+something **only a person with a browser and the passwords can do**. None of
+it can be done from a repo, and none of it can be done afterwards.
+
+- [ ] **Grant the workflow scope and push the budget monitor.**
+      `gh auth refresh -s workflow`, then commit and push
+      `fly-with-friends/.github/workflows/budget-watch.yml`. It is written and
+      sitting untracked because a plain `repo` token is not allowed to push
+      anything under `.github/workflows/`. Without it, running out of searches
+      looks exactly like the app working.
+- [ ] **Export the GitHub 2FA recovery codes** for `altorienl`, and keep them
+      somewhere that is not this machine. `gh auth login` on the new Mac needs
+      a second factor and there is no other way in. Everything — all three
+      repos, Pages, the Actions secrets, the schedules — hangs off this one
+      account.
+- [ ] **Check the GitHub notification email is personal.**
+      github.com/settings/emails. If it is an employer address, every Actions
+      failure notice and the account recovery mail both die with the job.
+- [ ] **Log in to each account once from your phone**, not this laptop:
+      GitHub, Cloudflare, GoDaddy, SerpApi, financialmodelingprep.com. This is
+      the cheap way to find out that a password only ever lived in this
+      machine's keychain, while there is still time to reset it.
+- [ ] **Copy `~/Downloads/Altorien Personal` off** — 112 files, 36MB. There is
+      no iCloud Drive configured here, so AirDrop it or put it in a personal
+      Drive. It is the only thing Monday destroys that GitHub will not bring
+      back.
+
+**Decided against, on purpose, so it does not look like an oversight later:**
+rotating the FMP key. It was public for 161 days and should be treated as
+compromised by the book, but it is out of the browser now (see
+`intrinsics/worker/`), so the exposure stopped growing. If FMP's dashboard
+ever shows daily calls that do not look like your own traffic, rotate it then
+— `intrinsics/worker/README.md` says where both copies live.
+
 ## What exists
 
 | Thing | Lives at | Repo |
