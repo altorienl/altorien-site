@@ -89,9 +89,12 @@ h2 { font-family: var(--mono); font-size: var(--t-0); text-transform: uppercase;
     margin-top: 42px; padding-bottom: 9px; border-bottom: 1px solid var(--rule); }
 
 .role { padding: 20px 0; border-bottom: 1px solid var(--edge); break-inside: avoid; }
-.role-head { display: flex; align-items: baseline; gap: 12px; }
+.role-head { display: flex; align-items: flex-start; gap: 12px; }
+/* The same marks as the front page, so the two read as one document. */
+.who { display: flex; align-items: center; gap: 11px; min-width: 0; min-height: 30px; }
+.co { width: 30px; height: 30px; border-radius: 6px; object-fit: contain; flex-shrink: 0; }
 .role h3 { font-size: var(--t-4); font-weight: 600; letter-spacing: -.018em; }
-.when { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
+.when { margin-left: auto; padding-top: 10px; font-family: var(--mono); font-size: var(--t-0);
     color: var(--faint); letter-spacing: .06em; white-space: nowrap; }
 .title { font-family: var(--mono); font-size: var(--t-0); color: var(--accent);
     text-transform: uppercase; letter-spacing: .07em; margin-top: 7px; }
@@ -129,7 +132,12 @@ footer a { color: var(--muted); text-decoration: none; }
     .name-row { display: block; }
     .where { display: block; margin-top: 8px; }
     .skill { grid-template-columns: 1fr; gap: 4px; }
-    .when { margin-left: 0; width: 100%; }
+    /* The date drops to its own line here. Indented past the logo so it
+     * starts under the company name rather than under the mark, and the
+     * padding that levels it beside the name is dropped, since there is
+     * nothing left to level it against. */
+    .when { margin-left: 41px; width: 100%; padding-top: 0; }
+    .proj-head .when { margin-left: 0; }
     .role-head, .proj-head { flex-wrap: wrap; }
 }
 
@@ -144,6 +152,9 @@ footer a { color: var(--muted); text-decoration: none; }
     h2 { margin-top: 20px; break-after: avoid; }
     a { color: #000 !important; text-decoration: none; }
     .role, .proj, .skill { break-inside: avoid; }
+    .co { display: none; }
+    .who { min-height: 0; gap: 0; }
+    .when { padding-top: 0; }
     /* Printed, a link is just black text -- so the two project URLs, the
      * strongest items here, become unreachable on paper. Print them. */
     .proj h3 a::after { content: " " attr(href); font-weight: 400;
@@ -184,7 +195,7 @@ footer a { color: var(--muted); text-decoration: none; }
 <h2>Experience</h2>
 
 <div class="role">
-    <div class="role-head"><h3>Rippling</h3><span class="when">Nov 2026 &ndash; Present</span></div>
+    <div class="role-head"><span class="who"><img class="co" src="/logo/rippling.png" alt="" width="30" height="30"><h3>Rippling</h3></span><span class="when">Nov 2026 &ndash; Present</span></div>
     <div class="title">Strategic Finance Senior Associate &middot; R&amp;D Strategic Finance</div>
     <p class="scope">Finance partner to the R&amp;D organization, owning the financial models
         behind infrastructure spend as the product portfolio moves into lines with different
@@ -201,7 +212,7 @@ footer a { color: var(--muted); text-decoration: none; }
 </div>
 
 <div class="role">
-    <div class="role-head"><h3>Indeed</h3><span class="when">Oct 2024 &ndash; Oct 2026</span></div>
+    <div class="role-head"><span class="who"><img class="co" src="/logo/indeed.png" alt="" width="30" height="30"><h3>Indeed</h3></span><span class="when">Oct 2024 &ndash; Oct 2026</span></div>
     <div class="title">Financial Analyst, R&amp;D &middot; Technology &amp; Infrastructure Finance</div>
     <p class="scope">Sole FP&amp;A owner for Business Technology &amp; Transformation, a
         <strong>$1.3B annual OpEx portfolio</strong> spanning headcount and non-headcount spend
@@ -223,7 +234,7 @@ footer a { color: var(--muted); text-decoration: none; }
 </div>
 
 <div class="role">
-    <div class="role-head"><h3>Edrington</h3><span class="when">Jun 2023 &ndash; Sep 2024</span></div>
+    <div class="role-head"><span class="who"><img class="co" src="/logo/edrington.png" alt="" width="30" height="30"><h3>Edrington</h3></span><span class="when">Jun 2023 &ndash; Sep 2024</span></div>
     <div class="title">Financial Analyst, FP&amp;A</div>
     <ul class="pts">
         <li>Modeled revenue, margin, pricing and volume assumptions across the commercial
@@ -236,7 +247,7 @@ footer a { color: var(--muted); text-decoration: none; }
 </div>
 
 <div class="role">
-    <div class="role-head"><h3>Lendlease</h3><span class="when">Aug 2019 &ndash; Jun 2023</span></div>
+    <div class="role-head"><span class="who"><img class="co" src="/logo/lendlease.png" alt="" width="30" height="30"><h3>Lendlease</h3></span><span class="when">Aug 2019 &ndash; Jun 2023</span></div>
     <div class="title">Staff Accountant (2021&ndash;2023) &middot; Junior Accountant (2019&ndash;2021)</div>
     <ul class="pts">
         <li>Owned full-cycle and project cost accounting for multi-year developments, including

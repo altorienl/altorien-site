@@ -304,6 +304,11 @@ section { padding: 46px 0 0; }
 .app-name, .app-tag { display: block; }
 .app-name { font-size: var(--t-4); font-weight: 600; letter-spacing: -.02em; }
 .app-tag { color: var(--muted); font-size: var(--t-2); margin-top: 1px; }
+/* The evidence line. Mono and faint so it reads as a fact rather than more
+ * pitch -- a recruiter sees a dozen portfolios saying what a thing does and
+ * none saying how long it has been doing it. */
+.app-proof { display: block; font-family: var(--mono); font-size: var(--t-0);
+    color: var(--faint); letter-spacing: .02em; margin-top: 6px; }
 .app-go {
     font-family: var(--mono); font-size: var(--t-1); color: var(--muted);
     margin-top: 5px; display: flex; align-items: center; gap: 5px;
@@ -385,7 +390,7 @@ section { padding: 46px 0 0; }
     .when { margin-left: 41px; width: 100%; }
 }
 .title { font-family: var(--mono); font-size: var(--t-0); color: var(--muted);
-    text-transform: uppercase; letter-spacing: .07em; margin-top: 7px; }
+    text-transform: uppercase; letter-spacing: .07em; margin-top: 13px; }
 .roles p { color: var(--muted); margin-top: 9px; font-size: var(--t-2); text-wrap: pretty; }
 
 
@@ -495,6 +500,7 @@ footer a:hover { color: var(--text); }
             <span class="app-txt">
                 <span class="app-name">Intrinsics</span>
                 <span class="app-tag">Any US stock, graded against its own sector</span>
+                <span class="app-proof">Regrades every stock nightly. Since May 2026.</span>
                 <span class="app-go">intrinsics.altorien.com</span>
             </span>
             <span class="open" aria-hidden="true">&rsaquo;</span>
@@ -511,6 +517,7 @@ footer a:hover { color: var(--text); }
             <span class="app-txt">
                 <span class="app-name">Fly with Friends</span>
                 <span class="app-tag">Arrive together. See what it costs.</span>
+                <span class="app-proof">Multiple travelers, one landing window, live fares.</span>
                 <span class="app-go">fly.altorien.com</span>
             </span>
             <span class="open" aria-hidden="true">&rsaquo;</span>
@@ -532,8 +539,8 @@ footer a:hover { color: var(--text); }
                 <span class="when">November 2026 &mdash; Present<em>San Francisco, CA</em></span>
             </div>
             <div class="title">Strategic Finance Senior Associate &middot; R&amp;D</div>
-            <p>Infrastructure economics for a product portfolio moving beyond its current
-                pricing model. Unit cost frameworks where there is no precedent to copy.</p>
+            <p>Infrastructure economics for a product portfolio moving beyond its
+                current pricing model.</p>
         </li>
         <li>
             <div class="role-head">
