@@ -56,6 +56,25 @@ function parseCalendar(html) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    /* One address for one page.
+     *
+     * www and the apex both answered 200 with identical bytes, which is two
+     * indexable URLs for every page on the site. The canonical tag already
+     * pointed at the apex and Google usually honours that, but "usually" is
+     * the wrong word for the result somebody gets when they search your name.
+     * A 301 is a directive rather than a hint, it consolidates any links
+     * pointing at www, and it means there is only ever one answer.
+     *
+     * Done here rather than in _redirects because this Worker answers before
+     * the asset handler and both hostnames are routed to it -- a rule in the
+     * assets layer never sees the request first. Path and query are preserved
+     * so a shared /resume link on www still lands on /resume. */
+    if (url.hostname === 'www.altorien.com') {
+      url.hostname = 'altorien.com';
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (url.pathname !== '/contrib.json') return env.ASSETS.fetch(request);
 
     const cache = caches.default;

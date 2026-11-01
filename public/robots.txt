@@ -1,2 +1,7 @@
+# Everything here is meant to be found. Nothing is disallowed on purpose:
+# blocking CSS, JS or images stops Google rendering the page as a visitor
+# sees it, and this site has nothing private on it.
 User-agent: *
 Allow: /
+
+Sitemap: https://altorien.com/sitemap.xml
