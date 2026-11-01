@@ -32,8 +32,11 @@ xcode-select --install          # git
 brew install node gh            # node 20+, GitHub CLI
 
 # 2. identity
-gh auth login                   # as altorienl
-npx wrangler login              # opens a browser, authorises Cloudflare
+gh auth login                   # as altorienl -- needs the password AND 2FA
+gh auth refresh -s workflow     # without this, pushing .github/workflows/ is rejected
+npx wrangler login              # opens a browser, authorizes Cloudflare
+git config --global user.name  "Altorien Lockwood"
+git config --global user.email "Altorien.Lockwood@outlook.com"
 
 # 3. the code
 mkdir -p ~/src && cd ~/src
@@ -64,7 +67,17 @@ npx wrangler deploy -c wrangler.site.toml
 cd worker && npx wrangler deploy -c ./wrangler.toml
 ```
 
-## The one secret
+## The secrets
+
+| Secret | Lives on | Set it with |
+|---|---|---|
+| `SERPAPI_KEY` | Cloudflare Worker `fly-with-friends-api` | `cd worker && npx wrangler secret put SERPAPI_KEY` |
+| `FMP_API_KEY` | Cloudflare Worker `intrinsics-api` | `cd worker && npx wrangler secret put FMP_API_KEY` |
+| `FMP_API_KEY` | GitHub Actions secret on `altorienl/intrinsics` | repo Settings -> Secrets -> Actions |
+
+The two FMP entries are the same key in two places, and missing either one
+fails quietly: the Worker copy blanks the page, the Actions copy silently
+stops `grades.json` updating. See `intrinsics/README.md`.
 
 `SERPAPI_KEY` is a Cloudflare Worker secret on `fly-with-friends-api`. It
 **cannot be read back** out of Cloudflare, by anyone, including you. It does
@@ -136,3 +149,54 @@ reference.
   January. Dates in the experience list are literal and do not.
 - **`public/lander/index.html` is a copy of the front page**, on purpose. See
   LANDER.md.
+
+## Two custom-domain rules that are exact opposites
+
+Getting these backwards takes a live site down, and the habit one teaches is
+wrong for the other.
+
+- **GitHub Pages (intrinsics):** the DNS record must exist **first**. Changing
+  the `CNAME` file takes the old hostname down the moment it is pushed.
+- **Cloudflare Workers (altorien.com, fly.altorien.com):** the hostname must
+  have **no DNS records at all**. A Workers custom domain refuses to attach to
+  a name that already resolves, and `wrangler deploy` creates the record
+  itself from the `[[routes]] custom_domain = true` entries.
+
+Related, and already learned twice the hard way: in `wrangler.toml` a bare key
+written **after** a `[[routes]]` table is parsed as part of that table. `name`,
+`main` and `workers_dev` must sit above every route block, or `workers_dev`
+silently becomes false and every link ever shared at the `workers.dev`
+hostname 404s while the custom domain keeps working.
+
+## The account everything hangs off
+
+`altorienl` on GitHub owns all three repos, Pages hosting for Intrinsics, the
+Actions secrets and the scheduled workflows. Losing it loses everything in
+this document at once.
+
+- The notification address must be **personal**, never an employer one. Every
+  Actions failure notice and the account recovery mail both go there.
+- Export the **2FA recovery codes** and keep them with the personal files, not
+  on the machine. `gh auth login` on a new Mac needs the password and a second
+  factor, and there is no other way in.
+- Registrar is **GoDaddy** (`altorien.com`, paid to Oct 2029). Nameservers
+  point at Cloudflare. The `intrinsics.app` forward lives there too and can be
+  allowed to lapse.
+- One paid API each: **SerpApi** ($25/mo Starter, Fly with Friends) and
+  **financialmodelingprep.com** (Intrinsics). Both on the personal email and
+  the personal card.
+
+## Monitoring, now that nothing runs on a laptop
+
+- `.github/workflows/budget-watch.yml` in `fly-with-friends` checks the public
+  `/budget` endpoint daily and opens a GitHub issue when the search allowance
+  goes low or dry. Without it, running out looks exactly like everything
+  working: users get a polite 429 and nothing else changes.
+- `scan.yml` in `intrinsics` opens an issue when the nightly grade refresh
+  fails. It commits daily, which also keeps GitHub from disabling the schedule
+  for inactivity — the 60-day idle rule that would otherwise switch both of
+  these off silently.
+- `./check-secrets.sh` in `fly-with-friends` scans a working tree **and the
+  full history of every ref** before publishing. Run it in any repo. The
+  one-line grep it replaced was broken for months and reported clean on a file
+  holding a live key.
