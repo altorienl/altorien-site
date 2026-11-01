@@ -3,20 +3,42 @@
  * Headless render rather than a hand-drawn image, so the card uses the same
  * tokens and type as the site and cannot drift from it. Run after changing
  * the template:  node tools/og.js
+ *
+ * Self-contained on purpose. This used to require a CDP driver from /tmp,
+ * which is a scratch directory: the script worked on the machine where that
+ * file happened to exist and nowhere else, and it would not have survived a
+ * reboot, never mind a new laptop. Chrome's own --screenshot does the same
+ * job with nothing to install.
  */
-const { launch, Page } = require('/tmp/cdp.js');
+const { execFileSync } = require('child_process');
 const path = require('path'), fs = require('fs');
-(async () => {
-  await launch();
-  const p = await Page.open('about:blank');
-  await p.send('Emulation.setDeviceMetricsOverride',
-    { width: 1200, height: 630, deviceScaleFactor: 2, mobile: false });
-  await p.goto('file://' + path.join(__dirname, 'og-template.html'));
-  await new Promise(r => setTimeout(r, 900));
-  const r = await p.send('Page.captureScreenshot',
-    { format: 'png', clip: { x: 0, y: 0, width: 1200, height: 630, scale: 2 } });
-  const out = path.join(__dirname, '..', 'public', 'og.png');
-  fs.writeFileSync(out, Buffer.from(r.data, 'base64'));
-  console.log('og.png ' + (fs.statSync(out).size / 1024).toFixed(0) + 'KB');
-  process.exit(0);
-})().catch(e => { console.error('ERR', e.message); process.exit(1); });
+
+const CHROME = [
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  '/Applications/Chromium.app/Contents/MacOS/Chromium',
+  '/usr/bin/google-chrome', '/usr/bin/chromium',
+].find(p => fs.existsSync(p));
+
+if (!CHROME) {
+  console.error('No Chrome found. Install Google Chrome, or point CHROME at a binary.');
+  process.exit(1);
+}
+
+const tpl = path.join(__dirname, 'og-template.html');
+const out = path.join(__dirname, '..', 'public', 'og.png');
+
+execFileSync(CHROME, [
+  '--headless', '--disable-gpu', '--no-sandbox', '--hide-scrollbars',
+  /* The card is a fixed 1200x630 surface, so the window IS the artboard and
+     there is nothing to crop. Scale factor 1: these dimensions are what the
+     og:image:width and :height tags declare, and an unfurler that fetches
+     four times the pixels it renders is just slower. */
+  '--force-device-scale-factor=1',
+  '--window-size=1200,630',
+  '--screenshot=' + out,
+  '--virtual-time-budget=4000',
+  'file://' + tpl,
+], { stdio: 'ignore' });
+
+const { size } = fs.statSync(out);
+console.log('public/og.png  ' + Math.round(size / 1024) + ' KB');
