@@ -16,12 +16,12 @@
      fetches this from its own servers with no page context, so a relative
      path resolves against nothing and the card comes back blank. That blank
      card is what the owner saw sharing the link on his phone. -->
-<meta property="og:image" content="https://altorien.com/og.png">
+<meta property="og:image" content="https://altorien.com/og-3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Altorien Lockwood — I work in finance. I build software, too.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://altorien.com/og.png">
+<meta name="twitter:image" content="https://altorien.com/og-3.png">
 <link rel="canonical" href="https://altorien.com/">
 <script type="application/ld+json">
 {
@@ -390,6 +390,15 @@ section { padding: 46px 0 0; }
 .role-head { display: flex; align-items: flex-start; justify-content: space-between;
     gap: 11px; flex-wrap: wrap; }
 .who { display: flex; align-items: center; gap: 11px; min-width: 0; min-height: 30px; }
+/* The employer name links to that company. Identical to plain text at rest
+   on purpose: a resume section turns into a wall of blue if these announce
+   themselves, and the information is the point, not the navigation. The
+   underline appears on hover, the ring on keyboard focus, and the whole
+   logo-plus-name block is the target rather than the words alone. */
+.who a { display: flex; align-items: center; gap: 11px; min-width: 0;
+    color: inherit; text-decoration: none; border-radius: 6px; }
+.who a:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
+.who a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .when { padding-top: 7px; margin-left: auto; }
 /* Company marks come from each company's own favicon, downloaded once and
  * served from here. Hotlinking a logo API would put four third-party requests
@@ -428,11 +437,17 @@ section { padding: 46px 0 0; }
  * without drawing it again. */
 .co { width: 30px; height: 30px; border-radius: 6px; object-fit: contain;
     flex-shrink: 0; }
-.co-indeed, .co-lendlease {
-    background: var(--card); border: 1px solid var(--edge);
-}
-.co-indeed { padding: 3px; }
-.co-lendlease { padding: 4px; }
+.co-indeed, .co-lendlease { border: 1px solid var(--edge); }
+/* Pure white, the whole interior. --card is #f5f2ec, a shade off the page,
+   and against warm paper that reads as a tile that failed to load rather
+   than as a deliberate icon. The border is what separates white from the
+   page now that the fill no longer does it. Padding 3px to 2px, so the mark
+   is larger inside the same outer box. */
+.co-indeed { background: #fff; padding: 2px; }
+/* Lendlease keeps the cream: its mark is a coloured flag, and pure white
+   behind it reads as a cut-out rather than a tile. 4px to 2.5px lifts the
+   flag about 12% inside an unchanged container, which is what was asked. */
+.co-lendlease { background: var(--card); padding: 2.5px; }
 .roles h3 { font-size: var(--t-3); font-weight: 600; letter-spacing: -.015em; }
 /* "November 2026 — Present" is three times the width of "2026.11 —", so the
  * head wraps rather than crushing the company name. On a wide screen it
@@ -507,9 +522,9 @@ footer a:hover { color: var(--text); }
         <img class="me-photo" src="/me.jpg" alt="Altorien Lockwood" width="76" height="76">
         <span class="where">San Francisco, CA</span>
     </div>
-    <h1>I work in finance. <br>I build software, too.</h1>
-    <p class="lede">I work in strategic finance and build software for problems I
-        find interesting.</p>
+    <h1>Finance by day. <br>SWE by evening.</h1>
+    <p class="lede">I work in strategic finance and build software that helps
+        people focus on the hard stuff.</p>
     <div class="socials">
         <a href="https://github.com/altorienl" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
         <a href="https://www.linkedin.com/in/altorien/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
@@ -599,18 +614,16 @@ footer a:hover { color: var(--text); }
     <ol class="roles" role="list">
         <li>
             <div class="role-head">
-                <span class="who"><img class="co co-rippling" src="/logo/rippling.png" alt="" width="30" height="30">
-                <h3>Rippling</h3></span>
+                <span class="who"><a href="https://www.rippling.com" target="_blank" rel="noopener"><img class="co co-rippling" src="/logo/rippling.png" alt="" width="30" height="30"><h3>Rippling</h3></a></span>
                 <span class="when">November 2026 &mdash; Present<em>San Francisco, CA</em></span>
             </div>
             <div class="title">Strategic Finance Senior Associate &middot; R&amp;D</div>
-            <p>Infrastructure economics for a product portfolio moving beyond its
-                current pricing model.</p>
+            <p>R&amp;D infrastructure finance, unit economics, and investment
+                decisions in partnership with Engineering.</p>
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co co-indeed" src="/logo/indeed.png" alt="" width="30" height="30">
-                <h3>Indeed</h3></span>
+                <span class="who"><a href="https://www.indeed.com" target="_blank" rel="noopener"><img class="co co-indeed" src="/logo/indeed.png" alt="" width="30" height="30"><h3>Indeed</h3></a></span>
                 <span class="when">October 2024 &mdash; November 2026<em>New York, NY</em></span>
             </div>
             <div class="title">Financial Analyst, R&amp;D</div>
@@ -619,8 +632,7 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co co-edrington" src="/logo/edrington.png" alt="" width="30" height="30">
-                <h3>Edrington</h3></span>
+                <span class="who"><a href="https://www.edrington.com" target="_blank" rel="noopener"><img class="co co-edrington" src="/logo/edrington.png" alt="" width="30" height="30"><h3>Edrington</h3></a></span>
                 <span class="when">June 2023 &mdash; September 2024<em>New York, NY</em></span>
             </div>
             <div class="title">Financial Analyst</div>
@@ -629,8 +641,7 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co co-lendlease" src="/logo/lendlease.png" alt="" width="30" height="30">
-                <h3>Lendlease</h3></span>
+                <span class="who"><a href="https://www.lendlease.com" target="_blank" rel="noopener"><img class="co co-lendlease" src="/logo/lendlease.png" alt="" width="30" height="30"><h3>Lendlease</h3></a></span>
                 <span class="when">August 2019 &mdash; June 2023<em>New York, NY</em></span>
             </div>
             <div class="title">Staff Accountant</div>
@@ -640,8 +651,7 @@ footer a:hover { color: var(--text); }
         <li class="group">Education</li>
         <li class="edu-row">
             <div class="role-head">
-                <span class="who"><img class="co co-wvu" src="/logo/wvu.png" alt="" width="30" height="30">
-                <h3>West Virginia University</h3></span>
+                <span class="who"><a href="https://www.wvu.edu" target="_blank" rel="noopener"><img class="co co-wvu" src="/logo/wvu.png" alt="" width="30" height="30"><h3>West Virginia University</h3></a></span>
                 <span class="when">May 2019<em>Morgantown, WV</em></span>
             </div>
             <div class="title">B.S. Accounting &middot; GPA 3.85</div>

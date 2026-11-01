@@ -25,7 +25,11 @@ if (!CHROME) {
 }
 
 const tpl = path.join(__dirname, 'og-template.html');
-const out = path.join(__dirname, '..', 'public', 'og.png');
+/* Versioned, and the old file is left in place. An unfurler that already
+   cached og.png keeps serving what it has however many times the bytes
+   change underneath it, so a new card needs a new URL. Bump this and the
+   two meta tags together when the card changes again. */
+const out = path.join(__dirname, '..', 'public', 'og-3.png');
 
 execFileSync(CHROME, [
   '--headless', '--disable-gpu', '--no-sandbox', '--hide-scrollbars',
@@ -41,4 +45,4 @@ execFileSync(CHROME, [
 ], { stdio: 'ignore' });
 
 const { size } = fs.statSync(out);
-console.log('public/og.png  ' + Math.round(size / 1024) + ' KB');
+console.log('public/og-3.png  ' + Math.round(size / 1024) + ' KB');
