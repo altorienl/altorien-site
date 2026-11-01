@@ -165,7 +165,9 @@ footer a { color: var(--muted); text-decoration: none; }
 }
 
 /* Cmd-P is the most likely thing anyone does here. */
+.pin { width: 1em; height: 1em; vertical-align: -0.13em; margin-right: .3em; opacity: .85; }
 @media print {
+    .pin { display: none; }
     nav, footer { display: none; }
     :root { --bg: #fff; --text: #000; --muted: #333; --faint: #666;
             --edge: #ddd; --rule: #999; --accent: #000; }
@@ -201,7 +203,7 @@ footer a { color: var(--muted); text-decoration: none; }
 <header>
     <div class="name-row">
         <h1>Altorien Lockwood</h1>
-        <span class="where">San Francisco, CA</span>
+        <span class="where"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>San Francisco, CA</span>
     </div>
     <div class="sub">Strategic Finance &middot; R&amp;D</div>
     <div class="contact">

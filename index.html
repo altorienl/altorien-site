@@ -153,6 +153,41 @@ h1 { font-size: var(--t-6); font-weight: 600; letter-spacing: -.028em; line-heig
 .status span { font-family: var(--mono); font-size: var(--t-1); color: var(--text); }
 .status .on { color: var(--accent); }
 
+/* The headshot opens. A button rather than a link on the image, because what
+   it does is show you a bigger copy of what you are already looking at --
+   there is nowhere to navigate to. Looks exactly like the bare image did. */
+.me-btn { padding: 0; border: 0; background: none; cursor: zoom-in;
+    border-radius: 50%; line-height: 0; -webkit-tap-highlight-color: transparent; }
+.me-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* The enlarged view. Not a modal library and not a carousel: one image, a
+   scrim, and three ways out -- Escape, the backdrop, or the close button.
+   Focus returns to the photo on close, which is the part keyboard users
+   notice when it is missing. */
+.lb { position: fixed; inset: 0; z-index: 90; display: none;
+    align-items: center; justify-content: center; padding: 24px;
+    background: rgba(26, 21, 16, .72); }
+.lb[open-now] { display: flex; }
+.lb img { width: min(240px, 70vw); height: auto; border-radius: 50%;
+    display: block; box-shadow: 0 10px 40px rgba(0,0,0,.3); }
+.lb-x { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px;
+    display: grid; place-items: center; border: 0; background: none;
+    color: #fff; font-size: 26px; line-height: 1; cursor: pointer;
+    border-radius: var(--r-md); }
+.lb-x:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+    .lb[open-now] img { animation: lbIn .18s ease-out; }
+    @keyframes lbIn { from { transform: scale(.94); opacity: 0 } to { transform: none; opacity: 1 } }
+}
+
+/* A drawn pin, not the emoji. An emoji renders as a different picture on
+   every platform -- flat red on one, glossy on another, a different colour
+   on a third -- and on a page this restrained that is the one element that
+   would not match anything else. This inherits the text colour the way the
+   social icons already do, so it is the same mark everywhere. */
+.pin { width: 1em; height: 1em; vertical-align: -0.13em;
+    margin-right: .3em; opacity: .85; }
+
 /* The headshot. Small on purpose -- this is a page about work, and a portrait
  * sized like a hero image makes it a page about a person who has a portrait. */
 .hero-top {
@@ -519,8 +554,10 @@ footer a:hover { color: var(--text); }
 
 <header>
     <div class="hero-top">
-        <img class="me-photo" src="/me.jpg" alt="Altorien Lockwood" width="76" height="76">
-        <span class="where">San Francisco, CA</span>
+        <button class="me-btn" id="meBtn" aria-label="Enlarge photo">
+            <img class="me-photo" src="/me.jpg" alt="Altorien Lockwood" width="76" height="76">
+        </button>
+        <span class="where"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>San Francisco, CA</span>
     </div>
     <h1>Finance by day. <br>SWE by evening.</h1>
     <p class="lede">I work in strategic finance and build software that helps
@@ -573,7 +610,7 @@ footer a:hover { color: var(--text); }
             <span class="num">01</span>
             <span class="ver"><i class="live-dot" aria-hidden="true"></i>Live</span>
         </div>
-        <a class="app" href="https://intrinsics.altorien.com">
+        <a class="app" href="https://intrinsics.altorien.com" target="_blank" rel="noopener">
             <img src="/icon-intrinsics.png" alt="" width="68" height="68">
             <span class="app-txt">
                 <span class="app-name">Intrinsics</span>
@@ -590,7 +627,7 @@ footer a:hover { color: var(--text); }
             <span class="num">02</span>
             <span class="ver"><i class="live-dot" aria-hidden="true"></i>Live</span>
         </div>
-        <a class="app" href="https://fly.altorien.com">
+        <a class="app" href="https://fly.altorien.com" target="_blank" rel="noopener">
             <img src="/icon-fwf.png" alt="" width="68" height="68">
             <span class="app-txt">
                 <span class="app-name">Fly with Friends</span>
@@ -765,6 +802,48 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 if (location.pathname.indexOf('/lander') === 0) {
     history.replaceState(null, '', '/');
 }
+</script>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo of Altorien Lockwood">
+    <button class="lb-x" id="lbX" aria-label="Close">&times;</button>
+    <img src="/me.jpg" alt="Altorien Lockwood" width="320" height="320">
+</div>
+<script>
+/* Open the headshot.
+ *
+ * Deliberately not a library: one image, a scrim, and three ways out. The
+ * parts that are easy to leave out and obvious when missing are the ones
+ * worth the lines -- Escape closes it, the backdrop closes it, the page
+ * behind stops scrolling while it is open, and focus goes back to the photo
+ * afterwards rather than to the top of the document.
+ *
+ * The source is 320px square, so the enlarged view is capped at 240 rather
+ * than filling the screen. Dropping a larger me.jpg in makes it sharper with
+ * no change here. */
+(function () {
+    var btn = document.getElementById('meBtn');
+    var lb = document.getElementById('lb');
+    var x = document.getElementById('lbX');
+    if (!btn || !lb || !x) return;
+
+    function open() {
+        lb.setAttribute('open-now', '');
+        document.body.style.overflow = 'hidden';
+        x.focus();
+    }
+    function close() {
+        lb.removeAttribute('open-now');
+        document.body.style.overflow = '';
+        btn.focus();
+    }
+    btn.addEventListener('click', open);
+    x.addEventListener('click', close);
+    /* The backdrop only -- clicking the photo itself should not close it,
+       which is the behaviour people expect from every other image viewer. */
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lb.hasAttribute('open-now')) close();
+    });
+}());
 </script>
 </body>
 </html>
