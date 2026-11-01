@@ -38,7 +38,11 @@
  * and keeps each role from breaking across a page. */
 :root {
     --bg: #ece8e1; --card: #f5f2ec; --text: #17150f; --muted: #5d574c;
-    --faint: #8a8275; --edge: #ddd7cb; --rule: #cfc8b9; --accent: #b36b00;
+    /* The same two values index.html uses. The resume kept the originals
+       when the front page was corrected, so its dates and job titles were
+       still failing AA at 3.11:1 and 3.43:1 -- the smallest text on the page
+       and the part a recruiter scans. Both clear 4.5:1 now, same hue. */
+    --faint: #6e6659; --edge: #ddd7cb; --rule: #cfc8b9; --accent: #965a00;
     --t-0: 11px; --t-1: 13px; --t-2: 15px; --t-3: 17px; --t-4: 21px; --t-6: 34px;
     --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 }
