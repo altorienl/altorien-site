@@ -432,7 +432,15 @@ section { padding: 46px 0 0; }
    logo-plus-name block is the target rather than the words alone. */
 .who a { display: flex; align-items: center; gap: 11px; min-width: 0;
     color: inherit; text-decoration: none; border-radius: 6px; }
-.who a:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
+/* skip-ink off, and the underline dropped a pixel to clear the descenders
+   it is no longer skipping. By default a browser breaks an underline around
+   any letter that crosses it, which on "West Virginia University" put a gap
+   under the g of Virginia -- and because that g sits just before a space it
+   read as the line splitting between two words rather than as a typographic
+   nicety. Rippling had the same notch under its pp and g, just small enough
+   to miss. One continuous rule on every name now. */
+.who a:hover h3 { text-decoration: underline; text-underline-offset: 4px;
+    text-decoration-skip-ink: none; }
 .who a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .when { padding-top: 7px; margin-left: auto; }
 /* Company marks come from each company's own favicon, downloaded once and
