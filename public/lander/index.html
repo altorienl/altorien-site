@@ -331,8 +331,25 @@ section { padding: 46px 0 0; }
  *
  * The logo opts out: an image on a baseline hangs its bottom edge there and
  * drops below the text, so it centers against the name instead. */
-.role-head { display: flex; align-items: baseline; gap: 11px; flex-wrap: wrap; }
-.role-head .co { align-self: center; }
+/* Three groups, not four items: the mark and the company are one thing and
+ * align to each other, the date column is another.
+ *
+ * align-self:center on a bare logo looked right until the city made the date
+ * column two lines -- centering is relative to the ROW, so the taller row
+ * dropped the logo below the name it belongs to. Nesting makes the pairing
+ * structural instead of a coincidence of equal heights. */
+/* flex-start, not baseline. `.who` is itself a flex box, so its baseline is
+ * taken from its first item -- the logo -- and an image's baseline is its
+ * bottom edge. Aligning the date column to THAT pushed the dates down past
+ * the company name they belong beside.
+ *
+ * Both columns top out together instead, and the date is nudged down by the
+ * difference between the 30px logo block and the 17px name inside it, so the
+ * first date line reads level with the company. */
+.role-head { display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 11px; flex-wrap: wrap; }
+.who { display: flex; align-items: center; gap: 11px; min-width: 0; min-height: 30px; }
+.when { padding-top: 7px; }
 /* Company marks come from each company's own favicon, downloaded once and
  * served from here. Hotlinking a logo API would put four third-party requests
  * on a page that otherwise makes none. */
@@ -349,7 +366,7 @@ section { padding: 46px 0 0; }
  * head wraps rather than crushing the company name. On a wide screen it
  * still sits hard right; on a phone it drops to its own line under the name,
  * which is where a date belongs when it will not fit beside one. */
-.when { margin-left: auto; font-family: var(--mono); font-size: var(--t-0);
+.when { font-family: var(--mono); font-size: var(--t-0);
     color: var(--faint); letter-spacing: .06em; white-space: nowrap;
     text-align: right; }
 /* The city, under its dates and in the same mono -- when and where are the
@@ -508,8 +525,8 @@ footer a:hover { color: var(--text); }
     <ol class="roles">
         <li>
             <div class="role-head">
-                <img class="co" src="logo/rippling.png" alt="" width="30" height="30" loading="lazy">
-                <h3>Rippling</h3>
+                <span class="who"><img class="co" src="logo/rippling.png" alt="" width="30" height="30" loading="lazy">
+                <h3>Rippling</h3></span>
                 <span class="when">November 2026 &mdash; Present<em>San Francisco, CA</em></span>
             </div>
             <div class="title">Strategic Finance Senior Associate &middot; R&amp;D</div>
@@ -518,8 +535,8 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <img class="co" src="logo/indeed.png" alt="" width="30" height="30" loading="lazy">
-                <h3>Indeed</h3>
+                <span class="who"><img class="co" src="logo/indeed.png" alt="" width="30" height="30" loading="lazy">
+                <h3>Indeed</h3></span>
                 <span class="when">October 2024 &mdash; October 2026<em>New York, NY</em></span>
             </div>
             <div class="title">Financial Analyst, R&amp;D</div>
@@ -528,8 +545,8 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <img class="co" src="logo/edrington.png" alt="" width="30" height="30" loading="lazy">
-                <h3>Edrington</h3>
+                <span class="who"><img class="co" src="logo/edrington.png" alt="" width="30" height="30" loading="lazy">
+                <h3>Edrington</h3></span>
                 <span class="when">June 2023 &mdash; September 2024<em>New York, NY</em></span>
             </div>
             <div class="title">Financial Analyst</div>
@@ -538,8 +555,8 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <img class="co" src="logo/lendlease.png" alt="" width="30" height="30" loading="lazy">
-                <h3>Lendlease</h3>
+                <span class="who"><img class="co" src="logo/lendlease.png" alt="" width="30" height="30" loading="lazy">
+                <h3>Lendlease</h3></span>
                 <span class="when">August 2019 &mdash; June 2023<em>New York, NY</em></span>
             </div>
             <div class="title">Staff Accountant</div>
@@ -549,8 +566,8 @@ footer a:hover { color: var(--text); }
         <li class="group">Education</li>
         <li class="edu-row">
             <div class="role-head">
-                <img class="co" src="logo/wvu.png" alt="" width="30" height="30" loading="lazy">
-                <h3>West Virginia University</h3>
+                <span class="who"><img class="co" src="logo/wvu.png" alt="" width="30" height="30" loading="lazy">
+                <h3>West Virginia University</h3></span>
                 <span class="when">May 2019<em>Morgantown, WV</em></span>
             </div>
             <div class="title">B.S. Accounting &middot; GPA 3.85</div>
