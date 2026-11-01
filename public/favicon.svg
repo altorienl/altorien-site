@@ -1,5 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#17150f"/>
-  <text x="32" y="45" font-family="-apple-system,BlinkMacSystemFont,Inter,sans-serif"
-        font-size="38" font-weight="600" fill="#ece8e1" text-anchor="middle">A</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Altorien Lockwood">
+  <!-- Aperture. One rule: three corners present, one of them gold, the
+       fourth cut away. That single asymmetric cut is the signature, and the
+       mark is mirror-symmetric about the other diagonal so it sits still
+       rather than leaning.
+
+       Drawn on a 16-unit grid scaled 4x, so every edge lands on a whole pixel
+       at 16, 32 and 48 and nothing is left to antialiasing. Measured at 16:
+       236 of 256 pixels are exactly #ece8e1, #1b1813 or #965a00, and the only
+       partials are the 20 at the rounded corners. Strokes are 8 units = 2px
+       at 16, the lightest weight that still reads, which suits a cream and
+       charcoal text site. The gold is the top-right corner itself rather than
+       an applied dot, which is what gets it to 12 pixels (4.7%) at 16 and
+       makes it perceptible as a warm color at true tab size.
+
+       DO NOT ship an inverted dark-scheme variant of this file. It was built
+       and rendered: on a charcoal tile the interior counter is the same value
+       as the surround, and because the bottom-left corner is open the
+       interior leaks out through the cut. What survives is a cream hook, not
+       a square, which is a different mark. If a prefers-color-scheme favicon
+       is ever wanted, keep this cream tile in both schemes. That also keeps
+       the gold at 4.58:1 on cream instead of 3.17:1 on ink.
+
+       The rounded corners below are only correct at favicon sizes. The 180
+       apple-touch-icon is a separate full-bleed file; see
+       tools/icons/apple-touch-icon.svg for why. -->
+  <rect width="64" height="64" rx="12" fill="#ece8e1"/>
+  <path d="M8 8H56V56H28V48H48V16H16V36H8Z" fill="#1b1813"/>
+  <path d="M40 8H56V24H48V16H40Z" fill="#965a00"/>
 </svg>

@@ -51,8 +51,14 @@
 }
 </script>
 
+<!-- Google documents the favicon it shows beside a search result as needing
+     to be a square that is a multiple of 48px, and it was only offered an
+     SVG, so the result carried the default globe. The .ico is 48 and the PNG
+     is 96; the SVG stays first for browsers, which prefer it. -->
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/icon-96.png" type="image/png" sizes="96x96">
 <style>
 /* A ledger, not a brochure.
  *
