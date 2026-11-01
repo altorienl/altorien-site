@@ -118,6 +118,23 @@ nav {
  * the right edge -- a nav item you cannot see is a page you cannot reach. The
  * name is hidden below 430px because the h1 immediately underneath already
  * says it, which buys back exactly the width the links needed. */
+/* Anchor jumps have to clear the sticky nav.
+ *
+ * Tapping WORK scrolled #work to y=0, which is underneath the 57px bar, so
+ * the section's own "§ 01 / WORK" label landed behind it and the page
+ * looked like it had jumped a line too far. scroll-margin-top is the
+ * browser's own answer: it does not move the section, it only tells the
+ * scroller where "the top of this" is for the purposes of landing on it.
+ *
+ * Measured, not assumed: the bar is 57px, plus safe-area inset on a notched
+ * phone, and a little air so the label is not flush against the rule. */
+:target, #work, #exp {
+    scroll-margin-top: calc(57px + env(safe-area-inset-top) + 14px);
+}
+/* And the jump itself is smooth unless the reader asked otherwise. */
+@media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+}
 nav .wrap { display: flex; align-items: center; gap: 18px; height: 46px;
     overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 nav .wrap::-webkit-scrollbar { display: none; }
