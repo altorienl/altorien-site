@@ -359,15 +359,46 @@ section { padding: 46px 0 0; }
 .when { padding-top: 7px; margin-left: auto; }
 /* Company marks come from each company's own favicon, downloaded once and
  * served from here. Hotlinking a logo API would put four third-party requests
- * on a page that otherwise makes none. */
-/* No background, no border, no padding. The first version gave every mark a
- * white tile, which put a visible box around the two logos that already carry
- * their own field -- Rippling's purple and Edrington's teal -- and made them
- * look pasted on. The radius still applies, so those two read as rounded
- * tiles, while Indeed's and Lendlease's transparent marks sit directly on the
- * page. Each logo is then shown the way its owner draws it. */
+ * on a page that otherwise makes none.
+ *
+ * ---------- one container, five marks ----------
+ * Every mark gets the same 30px square, the same 6px radius, the same left
+ * edge and the same optical center against the company name. The box never
+ * changes size, so nothing below it moves. What changes per logo is how much
+ * of that box its mark is allowed to fill.
+ *
+ * The source art arrives in two kinds, which is what made the column look
+ * assembled rather than placed. Rippling, Edrington and WVU ship a full-bleed
+ * brand tile that carries its own field; Indeed and Lendlease ship a
+ * free-standing mark on transparency. A tile fills the box and the radius
+ * clips it. A bare mark is given a tile of the page's own card surface, so it
+ * reads as the same object at the same size instead of a smaller loose
+ * graphic floating next to three colored squares.
+ *
+ * An earlier pass put a white tile behind EVERY mark, which boxed the two
+ * that already carry a field and made them look pasted on. The tile is only
+ * for the two with no field of their own, and it is --card over --edge, the
+ * surface every other card on this page is already drawn with. No new color
+ * enters the page.
+ *
+ * Padding rather than a smaller width: box-sizing is border-box, so the inset
+ * comes out of the 30px and object-fit:contain fits the mark in what is left.
+ * Nothing is stretched and no aspect ratio is forced.
+ *
+ * The two insets differ because the marks do. Indeed's is a thin stroke
+ * covering 23% of its own bounding box; Lendlease's is a solid flag covering
+ * 47%. One inset for both would have made the flag the loudest thing in the
+ * column. At these two it lands at 19.8x13.8 against Rippling's 18.9x14.2,
+ * which is as close as two different drawings get. Indeed stays the lightest
+ * of the five, because a 15px-wide hairline mark cannot be made heavier
+ * without drawing it again. */
 .co { width: 30px; height: 30px; border-radius: 6px; object-fit: contain;
     flex-shrink: 0; }
+.co-indeed, .co-lendlease {
+    background: var(--card); border: 1px solid var(--edge);
+}
+.co-indeed { padding: 3px; }
+.co-lendlease { padding: 4px; }
 .roles h3 { font-size: var(--t-3); font-weight: 600; letter-spacing: -.015em; }
 /* "November 2026 — Present" is three times the width of "2026.11 —", so the
  * head wraps rather than crushing the company name. On a wide screen it
@@ -534,7 +565,7 @@ footer a:hover { color: var(--text); }
     <ol class="roles" role="list">
         <li>
             <div class="role-head">
-                <span class="who"><img class="co" src="/logo/rippling.png" alt="" width="30" height="30">
+                <span class="who"><img class="co co-rippling" src="/logo/rippling.png" alt="" width="30" height="30">
                 <h3>Rippling</h3></span>
                 <span class="when">November 2026 &mdash; Present<em>San Francisco, CA</em></span>
             </div>
@@ -544,7 +575,7 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co" src="/logo/indeed.png" alt="" width="30" height="30">
+                <span class="who"><img class="co co-indeed" src="/logo/indeed.png" alt="" width="30" height="30">
                 <h3>Indeed</h3></span>
                 <span class="when">October 2024 &mdash; November 2026<em>New York, NY</em></span>
             </div>
@@ -554,7 +585,7 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co" src="/logo/edrington.png" alt="" width="30" height="30">
+                <span class="who"><img class="co co-edrington" src="/logo/edrington.png" alt="" width="30" height="30">
                 <h3>Edrington</h3></span>
                 <span class="when">June 2023 &mdash; September 2024<em>New York, NY</em></span>
             </div>
@@ -564,7 +595,7 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co" src="/logo/lendlease.png" alt="" width="30" height="30">
+                <span class="who"><img class="co co-lendlease" src="/logo/lendlease.png" alt="" width="30" height="30">
                 <h3>Lendlease</h3></span>
                 <span class="when">August 2019 &mdash; June 2023<em>New York, NY</em></span>
             </div>
@@ -575,7 +606,7 @@ footer a:hover { color: var(--text); }
         <li class="group">Education</li>
         <li class="edu-row">
             <div class="role-head">
-                <span class="who"><img class="co" src="/logo/wvu.png" alt="" width="30" height="30">
+                <span class="who"><img class="co co-wvu" src="/logo/wvu.png" alt="" width="30" height="30">
                 <h3>West Virginia University</h3></span>
                 <span class="when">May 2019<em>Morgantown, WV</em></span>
             </div>

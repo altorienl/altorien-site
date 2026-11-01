@@ -90,9 +90,16 @@ h2 { font-family: var(--mono); font-size: var(--t-0); text-transform: uppercase;
 
 .role { padding: 20px 0; border-bottom: 1px solid var(--edge); break-inside: avoid; }
 .role-head { display: flex; align-items: flex-start; gap: 12px; }
-/* The same marks as the front page, so the two read as one document. */
+/* The same marks as the front page, so the two read as one document -- and
+ * the same container system: one 30px box per mark, full-bleed for the brand
+ * tiles that carry their own field, a --card tile plus a measured inset for
+ * the two marks that arrive on transparency. The reasoning is written out
+ * once, on index.html, above its own .co rule. */
 .who { display: flex; align-items: center; gap: 11px; min-width: 0; min-height: 30px; }
 .co { width: 30px; height: 30px; border-radius: 6px; object-fit: contain; flex-shrink: 0; }
+.co-indeed, .co-lendlease { background: var(--card); border: 1px solid var(--edge); }
+.co-indeed { padding: 3px; }
+.co-lendlease { padding: 4px; }
 .role h3 { font-size: var(--t-4); font-weight: 600; letter-spacing: -.018em; }
 .when { margin-left: auto; padding-top: 10px; font-family: var(--mono); font-size: var(--t-0);
     color: var(--faint); letter-spacing: .06em; white-space: nowrap; }
@@ -196,7 +203,7 @@ footer a { color: var(--muted); text-decoration: none; }
 <h2>Experience</h2>
 
 <div class="role">
-    <div class="role-head"><span class="who"><img class="co" src="/logo/rippling.png" alt="" width="30" height="30"><h3>Rippling</h3></span><span class="when">Nov 2026 &ndash; Present</span></div>
+    <div class="role-head"><span class="who"><img class="co co-rippling" src="/logo/rippling.png" alt="" width="30" height="30"><h3>Rippling</h3></span><span class="when">Nov 2026 &ndash; Present</span></div>
     <div class="title">Strategic Finance Senior Associate &middot; R&amp;D Strategic Finance</div>
     <p class="scope">Finance partner to the R&amp;D organization, owning the financial models
         behind infrastructure spend as the product portfolio moves into lines with different
@@ -213,7 +220,7 @@ footer a { color: var(--muted); text-decoration: none; }
 </div>
 
 <div class="role">
-    <div class="role-head"><span class="who"><img class="co" src="/logo/indeed.png" alt="" width="30" height="30"><h3>Indeed</h3></span><span class="when">Oct 2024 &ndash; Nov 2026</span></div>
+    <div class="role-head"><span class="who"><img class="co co-indeed" src="/logo/indeed.png" alt="" width="30" height="30"><h3>Indeed</h3></span><span class="when">Oct 2024 &ndash; Nov 2026</span></div>
     <div class="title">Financial Analyst, R&amp;D &middot; Technology &amp; Infrastructure Finance</div>
     <p class="scope">Sole FP&amp;A owner for Business Technology &amp; Transformation, a
         <strong>$1.3B annual OpEx portfolio</strong> spanning headcount and non-headcount spend
@@ -235,7 +242,7 @@ footer a { color: var(--muted); text-decoration: none; }
 </div>
 
 <div class="role">
-    <div class="role-head"><span class="who"><img class="co" src="/logo/edrington.png" alt="" width="30" height="30"><h3>Edrington</h3></span><span class="when">Jun 2023 &ndash; Sep 2024</span></div>
+    <div class="role-head"><span class="who"><img class="co co-edrington" src="/logo/edrington.png" alt="" width="30" height="30"><h3>Edrington</h3></span><span class="when">Jun 2023 &ndash; Sep 2024</span></div>
     <div class="title">Financial Analyst, FP&amp;A</div>
     <ul class="pts">
         <li>Modeled revenue, margin, pricing and volume assumptions across the commercial
@@ -248,7 +255,7 @@ footer a { color: var(--muted); text-decoration: none; }
 </div>
 
 <div class="role">
-    <div class="role-head"><span class="who"><img class="co" src="/logo/lendlease.png" alt="" width="30" height="30"><h3>Lendlease</h3></span><span class="when">Aug 2019 &ndash; Jun 2023</span></div>
+    <div class="role-head"><span class="who"><img class="co co-lendlease" src="/logo/lendlease.png" alt="" width="30" height="30"><h3>Lendlease</h3></span><span class="when">Aug 2019 &ndash; Jun 2023</span></div>
     <div class="title">Staff Accountant (2021&ndash;2023) &middot; Junior Accountant (2019&ndash;2021)</div>
     <ul class="pts">
         <li>Owned full-cycle and project cost accounting for multi-year developments, including
