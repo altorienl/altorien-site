@@ -1,11 +1,34 @@
-# The whole reason /lander needed catching: a parking page cached for a year.
-# HTML revalidates from now on, so a bad deploy or another domain move cannot
-# strand somebody on a copy that no longer exists. Assets keep a real TTL --
-# they are versioned by content and never change under the same name.
+# Two rules must never both set Cache-Control on the same file. Cloudflare
+# merges matching rules by appending, so the previous version sent
+#   public, max-age=0, must-revalidate, public, max-age=604800
+# on every SVG, and browsers take the FIRST max-age. The asset TTL this file
+# claimed to grant never happened -- every image revalidated on every visit.
+# So /* carries security headers only, and caching is set per path below.
 /*
-  Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 
+# HTML revalidates always. This is the whole reason the file exists: a parked
+# page cached for a year is what stranded people on /lander, and a bad deploy
+# must never be able to pin somebody to a copy that no longer exists.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/resume
+  Cache-Control: public, max-age=0, must-revalidate
+/resume.html
+  Cache-Control: public, max-age=0, must-revalidate
+/lander/
+  Cache-Control: public, max-age=0, must-revalidate
+/lander/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Images and icons change name when they change, so a week is safe and keeps
+# the headshot and five logos off the wire on a repeat visit.
 /*.svg
+  Cache-Control: public, max-age=604800
+/*.png
+  Cache-Control: public, max-age=604800
+/*.jpg
   Cache-Control: public, max-age=604800

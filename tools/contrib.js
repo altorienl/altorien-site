@@ -72,9 +72,9 @@ cal.weeks.forEach((w, i) => {
 
 /* The grid alone is a grid. The owner's note: somebody who is not technical
  * has no idea what it is, and this page is read by finance people. So it is
- * labelled in words, says what a square means, and the whole block is a link
+ * labeled in words, says what a square means, and the whole block is a link
  * to the profile so the claim can be checked in one tap. The octocat mark is
- * there because it is the one piece of this that is recognised without
+ * there because it is the one piece of this that is recognized without
  * reading anything. */
 const block = `<!--CONTRIB-->
     <a class="contrib" href="https://github.com/${LOGIN}">

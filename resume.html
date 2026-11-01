@@ -17,11 +17,12 @@
      path resolves against nothing and the card comes back blank. That blank
      card is what the owner saw sharing the link on his phone. -->
 <meta property="og:image" content="https://altorien.com/og.png">
-<meta property="og:image:width" content="2400">
-<meta property="og:image:height" content="1260">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Altorien Lockwood — I build the tooling finance runs on.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://altorien.com/og.png">
+<link rel="canonical" href="https://altorien.com/resume">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
@@ -140,9 +141,16 @@ footer a { color: var(--muted); text-decoration: none; }
     body { padding: 0; font-size: 10.5pt; line-height: 1.4; }
     .wrap { max-width: none; padding: 0; }
     header { padding: 0 0 12px; }
-    h2 { margin-top: 20px; }
+    h2 { margin-top: 20px; break-after: avoid; }
     a { color: #000 !important; text-decoration: none; }
     .role, .proj, .skill { break-inside: avoid; }
+    /* Printed, a link is just black text -- so the two project URLs, the
+     * strongest items here, become unreachable on paper. Print them. */
+    .proj h3 a::after { content: " " attr(href); font-weight: 400;
+        font-size: 8.5pt; font-family: var(--mono); color: #444; }
+    /* Without this the measure is whatever the browser defaults to, which is
+     * about 105 characters on Letter in Chrome and different again in Safari. */
+    @page { margin: 14mm 16mm; }
 }
 </style>
 </head>
@@ -170,16 +178,13 @@ footer a { color: var(--muted); text-decoration: none; }
     <p class="summary">Finance analyst who builds the tooling finance runs on. I author the
         agent skills my team invokes by name, ship Python applications in production, and have
         owned FP&amp;A for a <strong>$1.3B technology OpEx portfolio</strong>. AI-assisted
-        development is my primary workflow rather than an accessory: I design the workflow,
-        write the prompt, and validate the output before it reaches a stakeholder. The rare
-        part is the translation layer &mdash; I speak to the model and to the senior finance
-        leader who has never opened a terminal.</p>
+        development is my primary workflow rather than an accessory.</p>
 </header>
 
 <h2>Experience</h2>
 
 <div class="role">
-    <div class="role-head"><h3>Rippling</h3><span class="when">Nov 2026 &mdash; Present</span></div>
+    <div class="role-head"><h3>Rippling</h3><span class="when">Nov 2026 &ndash; Present</span></div>
     <div class="title">Strategic Finance Senior Associate &middot; R&amp;D Strategic Finance</div>
     <p class="scope">Finance partner to the R&amp;D organization, owning the financial models
         behind infrastructure spend as the product portfolio moves into lines with different
@@ -221,12 +226,12 @@ footer a { color: var(--muted); text-decoration: none; }
     <div class="role-head"><h3>Edrington</h3><span class="when">Jun 2023 &ndash; Sep 2024</span></div>
     <div class="title">Financial Analyst, FP&amp;A</div>
     <ul class="pts">
-        <li>Modelled revenue, margin, pricing and volume assumptions across the commercial
+        <li>Modeled revenue, margin, pricing and volume assumptions across the commercial
             portfolio, with scenario and sensitivity analysis on pricing strategy.</li>
         <li>Supported operating cash flow and working capital analysis, including vendor payment
             timing and balance sheet drivers.</li>
         <li>Built a real-time <b>Power BI tracker</b> integrating shipments, actuals and open
-            orders for live revenue and fulfilment visibility.</li>
+            orders for live revenue and fulfillment visibility.</li>
     </ul>
 </div>
 
@@ -279,15 +284,15 @@ footer a { color: var(--muted); text-decoration: none; }
 
 <div class="proj">
     <div class="proj-head"><h3><a href="https://intrinsics.altorien.com">Intrinsics</a></h3>
-        <span class="meta">JavaScript &middot; 238 commits &middot; live, GitHub Actions CI/CD</span></div>
+        <span class="meta">JavaScript &middot; live, GitHub Actions CI/CD</span></div>
     <p>Stock analysis progressive web app. Eight ratios and a plain-English grade for any US
         stock, benchmarked against its own sector rather than the whole market. No login.</p>
 </div>
 
 <div class="proj">
     <div class="proj-head"><h3><a href="https://fly.altorien.com">Fly with Friends</a></h3>
-        <span class="meta">JavaScript, Cloudflare Workers &middot; 84 commits &middot; live</span></div>
-    <p>Finds the flights that land a group from different cities at one airport together, and
+        <span class="meta">JavaScript, Cloudflare Workers &middot; live</span></div>
+    <p>Finds the flights that bring a group from different cities into one airport together, and
         prices what that closeness costs. 578 checks across 12 suites; the optimizer's objective
         is priced in stated units after measurement found it overpaying $387 to buy 45 minutes.</p>
 </div>

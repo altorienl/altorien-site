@@ -17,13 +17,14 @@
      path resolves against nothing and the card comes back blank. That blank
      card is what the owner saw sharing the link on his phone. -->
 <meta property="og:image" content="https://altorien.com/og.png">
-<meta property="og:image:width" content="2400">
-<meta property="og:image:height" content="1260">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Altorien Lockwood — I build the tooling finance runs on.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://altorien.com/og.png">
+<link rel="canonical" href="https://altorien.com/">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 /* A ledger, not a brochure.
  *
@@ -47,10 +48,10 @@
     --card: #f5f2ec;
     --text: #17150f;
     --muted: #5d574c;
-    --faint: #8a8275;
+    --faint: #6e6659;
     --edge: #ddd7cb;
     --rule: #cfc8b9;
-    --accent: #b36b00;
+    --accent: #965a00;
     --intrinsics: #1f8f3d;
     --fwf: #c07c00;
     --t-0: 11px; --t-1: 13px; --t-2: 15px; --t-3: 17px;
@@ -86,7 +87,8 @@ nav {
 nav .wrap { display: flex; align-items: center; gap: 18px; height: 46px;
     overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 nav .wrap::-webkit-scrollbar { display: none; }
-nav a { white-space: nowrap; flex-shrink: 0; }
+nav a { white-space: nowrap; flex-shrink: 0; display: flex; align-items: center;
+    align-self: stretch; }
 nav a {
     color: var(--muted); text-decoration: none;
     font-size: var(--t-0); font-family: var(--mono);
@@ -229,7 +231,7 @@ h1 { font-size: var(--t-6); font-weight: 600; letter-spacing: -.028em; line-heig
 .gmonths span { grid-column: var(--c) / span 4; grid-row: 1; }
 /* Kept, and it is the only thing that explains the color ramp. Hiding it
  * was a reflex toward fewer elements and it removed the legend from the one
- * reader this card was relabelled for. */
+ * reader this card was relabeled for. */
 .glegend { display: flex; align-items: center; gap: 4px; margin-top: 9px;
     font-family: var(--mono); font-size: var(--t-0); color: var(--faint);
     text-transform: uppercase; letter-spacing: .07em; }
@@ -248,7 +250,7 @@ section { padding: 46px 0 0; }
 
 /* Borrowed from the market-open indicator on intrinsics.app, which is the
  * same claim -- this thing is running right now -- so it should look the
- * same. Recoloured for cream: #00ff41 is tuned for a dark terminal and burns
+ * same. Recolored for cream: #00ff41 is tuned for a dark terminal and burns
  * on this background, so the dot is a deep green with the glow carrying the
  * brightness instead of the fill.
  *
@@ -303,7 +305,7 @@ section { padding: 46px 0 0; }
 .app-name { font-size: var(--t-4); font-weight: 600; letter-spacing: -.02em; }
 .app-tag { color: var(--muted); font-size: var(--t-2); margin-top: 1px; }
 .app-go {
-    font-family: var(--mono); font-size: var(--t-1); color: var(--accent);
+    font-family: var(--mono); font-size: var(--t-1); color: var(--muted);
     margin-top: 5px; display: flex; align-items: center; gap: 5px;
 }
 .open { margin-left: auto; color: var(--faint); font-size: 20px; flex-shrink: 0; }
@@ -349,7 +351,7 @@ section { padding: 46px 0 0; }
 .role-head { display: flex; align-items: flex-start; justify-content: space-between;
     gap: 11px; flex-wrap: wrap; }
 .who { display: flex; align-items: center; gap: 11px; min-width: 0; min-height: 30px; }
-.when { padding-top: 7px; }
+.when { padding-top: 7px; margin-left: auto; }
 /* Company marks come from each company's own favicon, downloaded once and
  * served from here. Hotlinking a logo API would put four third-party requests
  * on a page that otherwise makes none. */
@@ -382,7 +384,7 @@ section { padding: 46px 0 0; }
 @media (max-width: 360px) {
     .when { margin-left: 41px; width: 100%; }
 }
-.title { font-family: var(--mono); font-size: var(--t-0); color: var(--accent);
+.title { font-family: var(--mono); font-size: var(--t-0); color: var(--muted);
     text-transform: uppercase; letter-spacing: .07em; margin-top: 7px; }
 .roles p { color: var(--muted); margin-top: 9px; font-size: var(--t-2); text-wrap: pretty; }
 
@@ -432,10 +434,10 @@ footer a:hover { color: var(--text); }
 
 <header>
     <div class="hero-top">
-        <img class="me-photo" src="me.jpg" alt="Altorien Lockwood" width="76" height="76">
+        <img class="me-photo" src="/me.jpg" alt="Altorien Lockwood" width="76" height="76">
         <span class="where">San Francisco, CA</span>
     </div>
-    <h1>I build the tooling<br>finance runs on.</h1>
+    <h1>I build the tooling <br>finance runs on.</h1>
     <p class="lede">Strategic finance by trade, engineer in practice. I design the
         workflow, write the code, and check the output before it reaches anyone.</p>
     <div class="socials">
@@ -448,13 +450,13 @@ footer a:hover { color: var(--text); }
 
     <dl class="status">
         <div><dt>Currently</dt>
-            <span class="on">Rippling &middot; Strategic Finance Senior Associate</span></div>
+            <dd class="on">Rippling &middot; Strategic Finance Senior Associate</dd></div>
         <div><dt>Before</dt>
-            <span>Indeed &middot; Financial Analyst, R&amp;D</span></div>
+            <dd>Indeed &middot; Financial Analyst, R&amp;D</dd></div>
         <div><dt>Shipped</dt>
-            <span>2 tools, live, solo, no login on either</span></div>
+            <dd>2 tools, live, solo, no login on either</dd></div>
         <div><dt>Building</dt>
-            <span>Flight matching that beats opening Google yourself</span></div>
+            <dd>Flight matching that beats opening Google yourself</dd></div>
     </dl>
 
     <!--CONTRIB-->
@@ -467,7 +469,7 @@ footer a:hover { color: var(--text); }
         </div>
         <div class="gmonths"><span style="--c:1">Oct</span><span style="--c:7">Dec</span><span style="--c:11">Jan</span><span style="--c:15">Feb</span><span style="--c:19">Mar</span><span style="--c:24">Apr</span><span style="--c:28">May</span><span style="--c:33">Jun</span><span style="--c:37">Jul</span><span style="--c:41">Aug</span><span style="--c:46">Sep</span><span style="--c:50">Oct</span></div>
         <div class="grid" aria-hidden="true"><span class="gw"><i style="background:#e2ddd1" title="2025-10-26: 0"></i><i style="background:#e2ddd1" title="2025-10-27: 0"></i><i style="background:#e2ddd1" title="2025-10-28: 0"></i><i style="background:#e2ddd1" title="2025-10-29: 0"></i><i style="background:#e2ddd1" title="2025-10-30: 0"></i><i style="background:#e2ddd1" title="2025-10-31: 0"></i><i style="background:#e2ddd1" title="2025-11-01: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-11-02: 0"></i><i style="background:#e2ddd1" title="2025-11-03: 0"></i><i style="background:#e2ddd1" title="2025-11-04: 0"></i><i style="background:#e2ddd1" title="2025-11-05: 0"></i><i style="background:#e2ddd1" title="2025-11-06: 0"></i><i style="background:#e2ddd1" title="2025-11-07: 0"></i><i style="background:#e2ddd1" title="2025-11-08: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-11-09: 0"></i><i style="background:#e2ddd1" title="2025-11-10: 0"></i><i style="background:#e2ddd1" title="2025-11-11: 0"></i><i style="background:#e2ddd1" title="2025-11-12: 0"></i><i style="background:#e2ddd1" title="2025-11-13: 0"></i><i style="background:#e2ddd1" title="2025-11-14: 0"></i><i style="background:#e2ddd1" title="2025-11-15: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-11-16: 0"></i><i style="background:#e2ddd1" title="2025-11-17: 0"></i><i style="background:#e2ddd1" title="2025-11-18: 0"></i><i style="background:#e2ddd1" title="2025-11-19: 0"></i><i style="background:#e2ddd1" title="2025-11-20: 0"></i><i style="background:#e2ddd1" title="2025-11-21: 0"></i><i style="background:#e2ddd1" title="2025-11-22: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-11-23: 0"></i><i style="background:#e2ddd1" title="2025-11-24: 0"></i><i style="background:#e2ddd1" title="2025-11-25: 0"></i><i style="background:#e2ddd1" title="2025-11-26: 0"></i><i style="background:#e2ddd1" title="2025-11-27: 0"></i><i style="background:#e2ddd1" title="2025-11-28: 0"></i><i style="background:#e2ddd1" title="2025-11-29: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-11-30: 0"></i><i style="background:#e2ddd1" title="2025-12-01: 0"></i><i style="background:#e2ddd1" title="2025-12-02: 0"></i><i style="background:#e2ddd1" title="2025-12-03: 0"></i><i style="background:#e2ddd1" title="2025-12-04: 0"></i><i style="background:#e2ddd1" title="2025-12-05: 0"></i><i style="background:#e2ddd1" title="2025-12-06: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-12-07: 0"></i><i style="background:#e2ddd1" title="2025-12-08: 0"></i><i style="background:#e2ddd1" title="2025-12-09: 0"></i><i style="background:#e2ddd1" title="2025-12-10: 0"></i><i style="background:#e2ddd1" title="2025-12-11: 0"></i><i style="background:#e2ddd1" title="2025-12-12: 0"></i><i style="background:#e2ddd1" title="2025-12-13: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-12-14: 0"></i><i style="background:#e2ddd1" title="2025-12-15: 0"></i><i style="background:#e2ddd1" title="2025-12-16: 0"></i><i style="background:#e2ddd1" title="2025-12-17: 0"></i><i style="background:#e2ddd1" title="2025-12-18: 0"></i><i style="background:#e2ddd1" title="2025-12-19: 0"></i><i style="background:#e2ddd1" title="2025-12-20: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-12-21: 0"></i><i style="background:#e2ddd1" title="2025-12-22: 0"></i><i style="background:#e2ddd1" title="2025-12-23: 0"></i><i style="background:#e2ddd1" title="2025-12-24: 0"></i><i style="background:#e2ddd1" title="2025-12-25: 0"></i><i style="background:#e2ddd1" title="2025-12-26: 0"></i><i style="background:#e2ddd1" title="2025-12-27: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2025-12-28: 0"></i><i style="background:#e2ddd1" title="2025-12-29: 0"></i><i style="background:#e2ddd1" title="2025-12-30: 0"></i><i style="background:#e2ddd1" title="2025-12-31: 0"></i><i style="background:#e2ddd1" title="2026-01-01: 0"></i><i style="background:#e2ddd1" title="2026-01-02: 0"></i><i style="background:#e2ddd1" title="2026-01-03: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-01-04: 0"></i><i style="background:#e2ddd1" title="2026-01-05: 0"></i><i style="background:#e2ddd1" title="2026-01-06: 0"></i><i style="background:#e2ddd1" title="2026-01-07: 0"></i><i style="background:#e2ddd1" title="2026-01-08: 0"></i><i style="background:#e2ddd1" title="2026-01-09: 0"></i><i style="background:#e2ddd1" title="2026-01-10: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-01-11: 0"></i><i style="background:#e2ddd1" title="2026-01-12: 0"></i><i style="background:#e2ddd1" title="2026-01-13: 0"></i><i style="background:#e2ddd1" title="2026-01-14: 0"></i><i style="background:#e2ddd1" title="2026-01-15: 0"></i><i style="background:#e2ddd1" title="2026-01-16: 0"></i><i style="background:#e2ddd1" title="2026-01-17: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-01-18: 0"></i><i style="background:#e2ddd1" title="2026-01-19: 0"></i><i style="background:#e2ddd1" title="2026-01-20: 0"></i><i style="background:#e2ddd1" title="2026-01-21: 0"></i><i style="background:#e2ddd1" title="2026-01-22: 0"></i><i style="background:#e2ddd1" title="2026-01-23: 0"></i><i style="background:#e2ddd1" title="2026-01-24: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-01-25: 0"></i><i style="background:#e2ddd1" title="2026-01-26: 0"></i><i style="background:#e2ddd1" title="2026-01-27: 0"></i><i style="background:#e2ddd1" title="2026-01-28: 0"></i><i style="background:#e2ddd1" title="2026-01-29: 0"></i><i style="background:#e2ddd1" title="2026-01-30: 0"></i><i style="background:#e2ddd1" title="2026-01-31: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-02-01: 0"></i><i style="background:#e2ddd1" title="2026-02-02: 0"></i><i style="background:#e2ddd1" title="2026-02-03: 0"></i><i style="background:#e2ddd1" title="2026-02-04: 0"></i><i style="background:#e2ddd1" title="2026-02-05: 0"></i><i style="background:#e2ddd1" title="2026-02-06: 0"></i><i style="background:#e2ddd1" title="2026-02-07: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-02-08: 0"></i><i style="background:#e2ddd1" title="2026-02-09: 0"></i><i style="background:#e2ddd1" title="2026-02-10: 0"></i><i style="background:#e2ddd1" title="2026-02-11: 0"></i><i style="background:#e2ddd1" title="2026-02-12: 0"></i><i style="background:#e2ddd1" title="2026-02-13: 0"></i><i style="background:#e2ddd1" title="2026-02-14: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-02-15: 0"></i><i style="background:#e2ddd1" title="2026-02-16: 0"></i><i style="background:#e2ddd1" title="2026-02-17: 0"></i><i style="background:#e2ddd1" title="2026-02-18: 0"></i><i style="background:#e2ddd1" title="2026-02-19: 0"></i><i style="background:#e2ddd1" title="2026-02-20: 0"></i><i style="background:#e2ddd1" title="2026-02-21: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-02-22: 0"></i><i style="background:#e2ddd1" title="2026-02-23: 0"></i><i style="background:#e2ddd1" title="2026-02-24: 0"></i><i style="background:#e2ddd1" title="2026-02-25: 0"></i><i style="background:#e2ddd1" title="2026-02-26: 0"></i><i style="background:#e2ddd1" title="2026-02-27: 0"></i><i style="background:#e2ddd1" title="2026-02-28: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-03-01: 0"></i><i style="background:#e2ddd1" title="2026-03-02: 0"></i><i style="background:#e2ddd1" title="2026-03-03: 0"></i><i style="background:#e2ddd1" title="2026-03-04: 0"></i><i style="background:#e2ddd1" title="2026-03-05: 0"></i><i style="background:#e2ddd1" title="2026-03-06: 0"></i><i style="background:#e2ddd1" title="2026-03-07: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-03-08: 0"></i><i style="background:#e2ddd1" title="2026-03-09: 0"></i><i style="background:#e2ddd1" title="2026-03-10: 0"></i><i style="background:#e2ddd1" title="2026-03-11: 0"></i><i style="background:#e2ddd1" title="2026-03-12: 0"></i><i style="background:#e2ddd1" title="2026-03-13: 0"></i><i style="background:#e2ddd1" title="2026-03-14: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-03-15: 0"></i><i style="background:#e2ddd1" title="2026-03-16: 0"></i><i style="background:#e2ddd1" title="2026-03-17: 0"></i><i style="background:#e2ddd1" title="2026-03-18: 0"></i><i style="background:#e2ddd1" title="2026-03-19: 0"></i><i style="background:#e2ddd1" title="2026-03-20: 0"></i><i style="background:#e2ddd1" title="2026-03-21: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-03-22: 0"></i><i style="background:#e2ddd1" title="2026-03-23: 0"></i><i style="background:#e2ddd1" title="2026-03-24: 0"></i><i style="background:#e2ddd1" title="2026-03-25: 0"></i><i style="background:#e2ddd1" title="2026-03-26: 0"></i><i style="background:#e2ddd1" title="2026-03-27: 0"></i><i style="background:#e2ddd1" title="2026-03-28: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-03-29: 0"></i><i style="background:#e2ddd1" title="2026-03-30: 0"></i><i style="background:#e2ddd1" title="2026-03-31: 0"></i><i style="background:#e2ddd1" title="2026-04-01: 0"></i><i style="background:#e2ddd1" title="2026-04-02: 0"></i><i style="background:#e2ddd1" title="2026-04-03: 0"></i><i style="background:#e2ddd1" title="2026-04-04: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-04-05: 0"></i><i style="background:#e2ddd1" title="2026-04-06: 0"></i><i style="background:#e2ddd1" title="2026-04-07: 0"></i><i style="background:#e2ddd1" title="2026-04-08: 0"></i><i style="background:#e2ddd1" title="2026-04-09: 0"></i><i style="background:#e2ddd1" title="2026-04-10: 0"></i><i style="background:#e2ddd1" title="2026-04-11: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-04-12: 0"></i><i style="background:#e2ddd1" title="2026-04-13: 0"></i><i style="background:#e2ddd1" title="2026-04-14: 0"></i><i style="background:#e2ddd1" title="2026-04-15: 0"></i><i style="background:#e2ddd1" title="2026-04-16: 0"></i><i style="background:#e2ddd1" title="2026-04-17: 0"></i><i style="background:#e2ddd1" title="2026-04-18: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-04-19: 0"></i><i style="background:#e2ddd1" title="2026-04-20: 0"></i><i style="background:#e2ddd1" title="2026-04-21: 0"></i><i style="background:#e2ddd1" title="2026-04-22: 0"></i><i style="background:#e2ddd1" title="2026-04-23: 0"></i><i style="background:#e2ddd1" title="2026-04-24: 0"></i><i style="background:#e2ddd1" title="2026-04-25: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-04-26: 0"></i><i style="background:#e2ddd1" title="2026-04-27: 0"></i><i style="background:#e2ddd1" title="2026-04-28: 0"></i><i style="background:#e2ddd1" title="2026-04-29: 0"></i><i style="background:#e2ddd1" title="2026-04-30: 0"></i><i style="background:#e2ddd1" title="2026-05-01: 0"></i><i style="background:#e2ddd1" title="2026-05-02: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-05-03: 0"></i><i style="background:#e2ddd1" title="2026-05-04: 0"></i><i style="background:#e2ddd1" title="2026-05-05: 0"></i><i style="background:#e2ddd1" title="2026-05-06: 0"></i><i style="background:#e2ddd1" title="2026-05-07: 0"></i><i style="background:#e2ddd1" title="2026-05-08: 0"></i><i style="background:#e2ddd1" title="2026-05-09: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-05-10: 0"></i><i style="background:#e2ddd1" title="2026-05-11: 0"></i><i style="background:#e2ddd1" title="2026-05-12: 0"></i><i style="background:#e2ddd1" title="2026-05-13: 0"></i><i style="background:#e2ddd1" title="2026-05-14: 0"></i><i style="background:#e2ddd1" title="2026-05-15: 0"></i><i style="background:#e2ddd1" title="2026-05-16: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-05-17: 0"></i><i style="background:#e2ddd1" title="2026-05-18: 0"></i><i style="background:#e2ddd1" title="2026-05-19: 0"></i><i style="background:#f0cf8e" title="2026-05-20: 4"></i><i style="background:#f0cf8e" title="2026-05-21: 4"></i><i style="background:#f0cf8e" title="2026-05-22: 2"></i><i style="background:#e2ddd1" title="2026-05-23: 0"></i></span><span class="gw"><i style="background:#f0cf8e" title="2026-05-24: 3"></i><i style="background:#8a5600" title="2026-05-25: 92"></i><i style="background:#e8a93a" title="2026-05-26: 14"></i><i style="background:#e8a93a" title="2026-05-27: 12"></i><i style="background:#c07c00" title="2026-05-28: 49"></i><i style="background:#f0cf8e" title="2026-05-29: 6"></i><i style="background:#f0cf8e" title="2026-05-30: 3"></i></span><span class="gw"><i style="background:#f0cf8e" title="2026-05-31: 3"></i><i style="background:#f0cf8e" title="2026-06-01: 1"></i><i style="background:#f0cf8e" title="2026-06-02: 2"></i><i style="background:#e2ddd1" title="2026-06-03: 0"></i><i style="background:#e2ddd1" title="2026-06-04: 0"></i><i style="background:#e2ddd1" title="2026-06-05: 0"></i><i style="background:#e2ddd1" title="2026-06-06: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-06-07: 0"></i><i style="background:#e2ddd1" title="2026-06-08: 0"></i><i style="background:#e2ddd1" title="2026-06-09: 0"></i><i style="background:#e2ddd1" title="2026-06-10: 0"></i><i style="background:#e2ddd1" title="2026-06-11: 0"></i><i style="background:#e2ddd1" title="2026-06-12: 0"></i><i style="background:#e2ddd1" title="2026-06-13: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-06-14: 0"></i><i style="background:#e2ddd1" title="2026-06-15: 0"></i><i style="background:#e2ddd1" title="2026-06-16: 0"></i><i style="background:#e2ddd1" title="2026-06-17: 0"></i><i style="background:#e2ddd1" title="2026-06-18: 0"></i><i style="background:#e2ddd1" title="2026-06-19: 0"></i><i style="background:#e2ddd1" title="2026-06-20: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-06-21: 0"></i><i style="background:#e2ddd1" title="2026-06-22: 0"></i><i style="background:#e2ddd1" title="2026-06-23: 0"></i><i style="background:#e2ddd1" title="2026-06-24: 0"></i><i style="background:#e8a93a" title="2026-06-25: 16"></i><i style="background:#e2ddd1" title="2026-06-26: 0"></i><i style="background:#f0cf8e" title="2026-06-27: 4"></i></span><span class="gw"><i style="background:#f0cf8e" title="2026-06-28: 3"></i><i style="background:#e2ddd1" title="2026-06-29: 0"></i><i style="background:#e2ddd1" title="2026-06-30: 0"></i><i style="background:#e2ddd1" title="2026-07-01: 0"></i><i style="background:#e2ddd1" title="2026-07-02: 0"></i><i style="background:#e2ddd1" title="2026-07-03: 0"></i><i style="background:#e2ddd1" title="2026-07-04: 0"></i></span><span class="gw"><i style="background:#f0cf8e" title="2026-07-05: 9"></i><i style="background:#f0cf8e" title="2026-07-06: 2"></i><i style="background:#e2ddd1" title="2026-07-07: 0"></i><i style="background:#e2ddd1" title="2026-07-08: 0"></i><i style="background:#e2ddd1" title="2026-07-09: 0"></i><i style="background:#e2ddd1" title="2026-07-10: 0"></i><i style="background:#e2ddd1" title="2026-07-11: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-07-12: 0"></i><i style="background:#e2ddd1" title="2026-07-13: 0"></i><i style="background:#e2ddd1" title="2026-07-14: 0"></i><i style="background:#e2ddd1" title="2026-07-15: 0"></i><i style="background:#e2ddd1" title="2026-07-16: 0"></i><i style="background:#e2ddd1" title="2026-07-17: 0"></i><i style="background:#e2ddd1" title="2026-07-18: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-07-19: 0"></i><i style="background:#e2ddd1" title="2026-07-20: 0"></i><i style="background:#e2ddd1" title="2026-07-21: 0"></i><i style="background:#e2ddd1" title="2026-07-22: 0"></i><i style="background:#e2ddd1" title="2026-07-23: 0"></i><i style="background:#e2ddd1" title="2026-07-24: 0"></i><i style="background:#f0cf8e" title="2026-07-25: 2"></i></span><span class="gw"><i style="background:#f0cf8e" title="2026-07-26: 9"></i><i style="background:#e2ddd1" title="2026-07-27: 0"></i><i style="background:#e2ddd1" title="2026-07-28: 0"></i><i style="background:#e2ddd1" title="2026-07-29: 0"></i><i style="background:#e2ddd1" title="2026-07-30: 0"></i><i style="background:#e2ddd1" title="2026-07-31: 0"></i><i style="background:#e2ddd1" title="2026-08-01: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-08-02: 0"></i><i style="background:#e2ddd1" title="2026-08-03: 0"></i><i style="background:#e2ddd1" title="2026-08-04: 0"></i><i style="background:#e2ddd1" title="2026-08-05: 0"></i><i style="background:#e2ddd1" title="2026-08-06: 0"></i><i style="background:#e2ddd1" title="2026-08-07: 0"></i><i style="background:#e2ddd1" title="2026-08-08: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-08-09: 0"></i><i style="background:#e2ddd1" title="2026-08-10: 0"></i><i style="background:#e2ddd1" title="2026-08-11: 0"></i><i style="background:#e2ddd1" title="2026-08-12: 0"></i><i style="background:#e2ddd1" title="2026-08-13: 0"></i><i style="background:#e2ddd1" title="2026-08-14: 0"></i><i style="background:#e2ddd1" title="2026-08-15: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-08-16: 0"></i><i style="background:#e2ddd1" title="2026-08-17: 0"></i><i style="background:#e2ddd1" title="2026-08-18: 0"></i><i style="background:#e2ddd1" title="2026-08-19: 0"></i><i style="background:#e2ddd1" title="2026-08-20: 0"></i><i style="background:#e2ddd1" title="2026-08-21: 0"></i><i style="background:#e2ddd1" title="2026-08-22: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-08-23: 0"></i><i style="background:#f0cf8e" title="2026-08-24: 2"></i><i style="background:#e2ddd1" title="2026-08-25: 0"></i><i style="background:#e2ddd1" title="2026-08-26: 0"></i><i style="background:#e2ddd1" title="2026-08-27: 0"></i><i style="background:#f0cf8e" title="2026-08-28: 2"></i><i style="background:#e2ddd1" title="2026-08-29: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-08-30: 0"></i><i style="background:#e2ddd1" title="2026-08-31: 0"></i><i style="background:#e2ddd1" title="2026-09-01: 0"></i><i style="background:#e2ddd1" title="2026-09-02: 0"></i><i style="background:#e2ddd1" title="2026-09-03: 0"></i><i style="background:#e2ddd1" title="2026-09-04: 0"></i><i style="background:#e2ddd1" title="2026-09-05: 0"></i></span><span class="gw"><i style="background:#f0cf8e" title="2026-09-06: 6"></i><i style="background:#f0cf8e" title="2026-09-07: 7"></i><i style="background:#e2ddd1" title="2026-09-08: 0"></i><i style="background:#e2ddd1" title="2026-09-09: 0"></i><i style="background:#e2ddd1" title="2026-09-10: 0"></i><i style="background:#e2ddd1" title="2026-09-11: 0"></i><i style="background:#e2ddd1" title="2026-09-12: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-09-13: 0"></i><i style="background:#e2ddd1" title="2026-09-14: 0"></i><i style="background:#e2ddd1" title="2026-09-15: 0"></i><i style="background:#e2ddd1" title="2026-09-16: 0"></i><i style="background:#e2ddd1" title="2026-09-17: 0"></i><i style="background:#e2ddd1" title="2026-09-18: 0"></i><i style="background:#e2ddd1" title="2026-09-19: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-09-20: 0"></i><i style="background:#e2ddd1" title="2026-09-21: 0"></i><i style="background:#e2ddd1" title="2026-09-22: 0"></i><i style="background:#e2ddd1" title="2026-09-23: 0"></i><i style="background:#e2ddd1" title="2026-09-24: 0"></i><i style="background:#e2ddd1" title="2026-09-25: 0"></i><i style="background:#e2ddd1" title="2026-09-26: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-09-27: 0"></i><i style="background:#e2ddd1" title="2026-09-28: 0"></i><i style="background:#e2ddd1" title="2026-09-29: 0"></i><i style="background:#e2ddd1" title="2026-09-30: 0"></i><i style="background:#e2ddd1" title="2026-10-01: 0"></i><i style="background:#e2ddd1" title="2026-10-02: 0"></i><i style="background:#e2ddd1" title="2026-10-03: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-10-04: 0"></i><i style="background:#e2ddd1" title="2026-10-05: 0"></i><i style="background:#e2ddd1" title="2026-10-06: 0"></i><i style="background:#e2ddd1" title="2026-10-07: 0"></i><i style="background:#e2ddd1" title="2026-10-08: 0"></i><i style="background:#e2ddd1" title="2026-10-09: 0"></i><i style="background:#e2ddd1" title="2026-10-10: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-10-11: 0"></i><i style="background:#e2ddd1" title="2026-10-12: 0"></i><i style="background:#e2ddd1" title="2026-10-13: 0"></i><i style="background:#e2ddd1" title="2026-10-14: 0"></i><i style="background:#e2ddd1" title="2026-10-15: 0"></i><i style="background:#e2ddd1" title="2026-10-16: 0"></i><i style="background:#e2ddd1" title="2026-10-17: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-10-18: 0"></i><i style="background:#e2ddd1" title="2026-10-19: 0"></i><i style="background:#e2ddd1" title="2026-10-20: 0"></i><i style="background:#e2ddd1" title="2026-10-21: 0"></i><i style="background:#e2ddd1" title="2026-10-22: 0"></i><i style="background:#e2ddd1" title="2026-10-23: 0"></i><i style="background:#e2ddd1" title="2026-10-24: 0"></i></span><span class="gw"><i style="background:#e2ddd1" title="2026-10-25: 0"></i><i style="background:#e2ddd1" title="2026-10-26: 0"></i><i style="background:#e2ddd1" title="2026-10-27: 0"></i><i style="background:#e2ddd1" title="2026-10-28: 0"></i><i style="background:#f0cf8e" title="2026-10-29: 3"></i><i style="background:#e2ddd1" title="2026-10-30: 0"></i><i style="background:#e2ddd1" title="2026-10-31: 0"></i></span></div>
-        <div class="glegend"><span>Fewer</span><i style="background:#e2ddd1"></i><i style="background:#f0cf8e"></i><i style="background:#e8a93a"></i><i style="background:#c07c00"></i><i style="background:#8a5600"></i><span>More</span></div>
+        <div class="glegend" aria-hidden="true"><span>Fewer</span><i style="background:#e2ddd1"></i><i style="background:#f0cf8e"></i><i style="background:#e8a93a"></i><i style="background:#c07c00"></i><i style="background:#8a5600"></i><span>More</span></div>
         <div class="contrib-line">
             <b>260</b> contributions on
             <b>25</b> days &middot; busiest was <b>92</b>
@@ -480,7 +482,7 @@ footer a:hover { color: var(--text); }
 <section id="work">
     <div class="opener">
         <div class="mark">&sect; 01 / Work</div>
-        <h2>Two Apps, both live.</h2>
+        <h2>Two apps, both live.</h2>
     </div>
 
     <article class="entry p-int">
@@ -489,10 +491,10 @@ footer a:hover { color: var(--text); }
             <span class="ver"><i class="live-dot" aria-hidden="true"></i>Live</span>
         </div>
         <a class="app" href="https://intrinsics.altorien.com">
-            <img src="icon-intrinsics.png" alt="" width="68" height="68" loading="lazy">
+            <img src="/icon-intrinsics.png" alt="" width="68" height="68">
             <span class="app-txt">
                 <span class="app-name">Intrinsics</span>
-                <span class="app-tag">Balance sheets, graded A to F</span>
+                <span class="app-tag">Any US stock, graded against its own sector</span>
                 <span class="app-go">intrinsics.altorien.com</span>
             </span>
             <span class="open" aria-hidden="true">&rsaquo;</span>
@@ -505,10 +507,10 @@ footer a:hover { color: var(--text); }
             <span class="ver"><i class="live-dot" aria-hidden="true"></i>Live</span>
         </div>
         <a class="app" href="https://fly.altorien.com">
-            <img src="icon-fwf.png" alt="" width="68" height="68" loading="lazy">
+            <img src="/icon-fwf.png" alt="" width="68" height="68">
             <span class="app-txt">
                 <span class="app-name">Fly with Friends</span>
-                <span class="app-tag">Flights that land you together</span>
+                <span class="app-tag">Arrive together. See what it costs.</span>
                 <span class="app-go">fly.altorien.com</span>
             </span>
             <span class="open" aria-hidden="true">&rsaquo;</span>
@@ -522,10 +524,10 @@ footer a:hover { color: var(--text); }
         <h2>Seven years, one direction.</h2>
     </div>
 
-    <ol class="roles">
+    <ol class="roles" role="list">
         <li>
             <div class="role-head">
-                <span class="who"><img class="co" src="logo/rippling.png" alt="" width="30" height="30" loading="lazy">
+                <span class="who"><img class="co" src="/logo/rippling.png" alt="" width="30" height="30">
                 <h3>Rippling</h3></span>
                 <span class="when">November 2026 &mdash; Present<em>San Francisco, CA</em></span>
             </div>
@@ -535,7 +537,7 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co" src="logo/indeed.png" alt="" width="30" height="30" loading="lazy">
+                <span class="who"><img class="co" src="/logo/indeed.png" alt="" width="30" height="30">
                 <h3>Indeed</h3></span>
                 <span class="when">October 2024 &mdash; October 2026<em>New York, NY</em></span>
             </div>
@@ -545,7 +547,7 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co" src="logo/edrington.png" alt="" width="30" height="30" loading="lazy">
+                <span class="who"><img class="co" src="/logo/edrington.png" alt="" width="30" height="30">
                 <h3>Edrington</h3></span>
                 <span class="when">June 2023 &mdash; September 2024<em>New York, NY</em></span>
             </div>
@@ -555,7 +557,7 @@ footer a:hover { color: var(--text); }
         </li>
         <li>
             <div class="role-head">
-                <span class="who"><img class="co" src="logo/lendlease.png" alt="" width="30" height="30" loading="lazy">
+                <span class="who"><img class="co" src="/logo/lendlease.png" alt="" width="30" height="30">
                 <h3>Lendlease</h3></span>
                 <span class="when">August 2019 &mdash; June 2023<em>New York, NY</em></span>
             </div>
@@ -566,7 +568,7 @@ footer a:hover { color: var(--text); }
         <li class="group">Education</li>
         <li class="edu-row">
             <div class="role-head">
-                <span class="who"><img class="co" src="logo/wvu.png" alt="" width="30" height="30" loading="lazy">
+                <span class="who"><img class="co" src="/logo/wvu.png" alt="" width="30" height="30">
                 <h3>West Virginia University</h3></span>
                 <span class="when">May 2019<em>Morgantown, WV</em></span>
             </div>
@@ -624,6 +626,43 @@ document.getElementById('yr').textContent = new Date().getFullYear();
         }
         grid.textContent = '';
         grid.appendChild(frag);
+
+        /* The month ruler has to be rebuilt from the same data, not left as
+         * baked HTML. The squares roll forward every day; labels that do not
+         * stay correct only until the window crosses a year boundary, and in
+         * January the grid would read Jan 2026 to Jan 2027 under labels still
+         * saying Oct...Oct. Placed by grid-column on the same track as the
+         * squares, so the two cannot drift apart. */
+        var months = document.querySelector('.contrib .gmonths');
+        if (months) {
+            var mnames = ['Jan','Feb','Mar','Apr','May','Jun',
+                          'Jul','Aug','Sep','Oct','Nov','Dec'];
+            var mfrag = document.createDocumentFragment(), seen = -1;
+            for (var w2 = 0; w2 < d.weeks; w2++) {
+                var first = d.days[w2 * 7];
+                if (!first) continue;
+                var m = +first.date.slice(5, 7) - 1;
+                /* Label a month at the first week that starts inside it, and
+                 * skip the first column: a month starting mid-week there would
+                 * sit under three of its own days and read as a full month. */
+                if (m !== seen && w2 > 0) {
+                    var sp = document.createElement('span');
+                    sp.style.setProperty('--c', w2 + 1);
+                    sp.textContent = mnames[m];
+                    mfrag.appendChild(sp);
+                }
+                seen = m;
+            }
+            months.textContent = '';
+            months.appendChild(mfrag);
+        }
+
+        /* Both tracks are declared as 53 columns in CSS, but GitHub returns 52
+         * in some years. Setting them from the data keeps the labels sitting
+         * over the squares they name. */
+        var tracks = 'repeat(' + d.weeks + ', 1fr)';
+        grid.style.gridTemplateColumns = tracks;
+        if (months) months.style.gridTemplateColumns = tracks;
 
         if (line && d.busiest.date) {
             var dt = new Date(d.busiest.date + 'T00:00:00Z');

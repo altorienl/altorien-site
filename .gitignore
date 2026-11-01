@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+.DS_Store
+node_modules/
+.wrangler/
+
+_*
+*.pyc
+dist/
+
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+
+# Agent worktrees are separate checkouts, not content.
+.claude/worktrees/
