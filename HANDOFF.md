@@ -210,6 +210,14 @@ hostname 404s while the custom domain keeps working.
 Actions secrets and the scheduled workflows. Losing it loses everything in
 this document at once.
 
+- **Log in as `altorienl`, not `alockwood-lab`.** On the old machine `gh`
+  was labelled `alockwood-lab` while the token underneath belonged to
+  `altorienl`, and the two disagreeing is why `gh auth refresh -s workflow`
+  would not take: the browser authorised one account and the terminal held a
+  token for the other. A clean `gh auth login` as `altorienl` avoids the
+  whole thing. Symptom if it happens again: a push is rejected for "without
+  `workflow` scope" no matter how many times the scope is granted, and
+  `gh api user --jq .login` disagrees with `gh auth status`.
 - The notification address must be **personal**, never an employer one. Every
   Actions failure notice and the account recovery mail both go there.
 - Export the **2FA recovery codes** and keep them with the personal files, not
