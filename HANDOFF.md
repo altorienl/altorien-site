@@ -31,10 +31,10 @@ it can be done from a repo, and none of it can be done afterwards.
       GitHub, Cloudflare, GoDaddy, SerpApi, financialmodelingprep.com. This is
       the cheap way to find out that a password only ever lived in this
       machine's keychain, while there is still time to reset it.
-- [ ] **Copy `~/Downloads/Altorien Personal` off** — 112 files, 36MB. There is
-      no iCloud Drive configured here, so AirDrop it or put it in a personal
-      Drive. It is the only thing Monday destroys that GitHub will not bring
-      back.
+- [x] **Copy `~/Downloads/Altorien Personal` off** — done, 2026-11-01, to a
+      personal Google Drive. This was the only item on the list that nothing
+      else could recover: every line of code and every site is on GitHub and
+      Cloudflare, but those 112 files existed in one place.
 
 **Decided against, on purpose, so it does not look like an oversight later:**
 rotating the FMP key. It was public for 161 days and should be treated as
