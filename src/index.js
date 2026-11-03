@@ -16,7 +16,7 @@ const TTL = 60 * 60 * 6;   /* six hours, at the edge */
  * the query string -- otherwise anyone could force a GitHub fetch per
  * request -- which also means a deploy alone will not invalidate it. This is
  * the handle that does. */
-const V = 3;
+const V = 4;
 
 function parseCalendar(html) {
   /* Counts live in <tool-tip for="cell-id">N contributions on March 3rd.</tool-tip>,
@@ -83,7 +83,13 @@ export default {
     if (hit) return hit;
 
     try {
-      const res = await fetch(`https://github.com/users/${LOGIN}/contributions`, {
+      /* V rides along on the UPSTREAM url too, not just the cache key below.
+         Without it a bump only misses our own caches.default entry and then
+         re-fetches GitHub through `cacheEverything`, which is keyed on this
+         url and holds the old HTML for the rest of its TTL -- so the bump
+         appears to do nothing for six hours. GitHub ignores the parameter.
+         Verified: with and without it the page parses identically. */
+      const res = await fetch(`https://github.com/users/${LOGIN}/contributions?v=${V}`, {
         headers: { 'User-Agent': 'altorien.com', 'Accept': 'text/html' },
         cf: { cacheTtl: TTL, cacheEverything: true },
       });
