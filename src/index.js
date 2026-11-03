@@ -16,7 +16,7 @@ const TTL = 60 * 60 * 6;   /* six hours, at the edge */
  * the query string -- otherwise anyone could force a GitHub fetch per
  * request -- which also means a deploy alone will not invalidate it. This is
  * the handle that does. */
-const V = 2;
+const V = 3;
 
 function parseCalendar(html) {
   /* Counts live in <tool-tip for="cell-id">N contributions on March 3rd.</tool-tip>,
